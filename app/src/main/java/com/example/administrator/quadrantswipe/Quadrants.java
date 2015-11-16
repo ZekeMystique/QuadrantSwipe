@@ -33,6 +33,7 @@ public class Quadrants extends AppCompatActivity implements GestureDetector.OnGe
     private static final String TAG = "Swipetesting";
     private static final int SWIPE_MIN_DISTANCE = 25;
     private static final int SWIPE_THRESHOLD_VELOCITY = 20;
+    private static boolean doUpper = false;
 
     @Override
     public boolean onDown(MotionEvent e) {
@@ -139,9 +140,14 @@ public class Quadrants extends AppCompatActivity implements GestureDetector.OnGe
     }
 
     public void handleText(String inText){
+        if(doUpper){
+            inText = inText.toUpperCase();
+        }
         TextView outputText = (TextView) findViewById(R.id.outputText);
         if(inText != null){
-        outputText.append(inText);
+
+            outputText.append(inText);
+            doUpper = false;
         }
     }
 
@@ -160,6 +166,15 @@ public class Quadrants extends AppCompatActivity implements GestureDetector.OnGe
 
     public void onSpaceClick(View view) {
         handleText(" ");
+    }
+
+    public void onShiftClick(View view) {
+        if(!doUpper){
+            doUpper = true;
+        }
+        else{
+            doUpper = false;
+        }
     }
 
     public void populateView(CharacterTree tree){
