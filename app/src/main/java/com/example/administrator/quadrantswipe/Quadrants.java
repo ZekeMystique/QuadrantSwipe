@@ -31,8 +31,8 @@ public class Quadrants extends AppCompatActivity implements GestureDetector.OnGe
     private CharacterTree myCharTree = new CharacterTree();
     //private static int page = 1;
     private static final String TAG = "Swipetesting";
-    private static final int SWIPE_MIN_DISTANCE = 75;
-    private static final int SWIPE_THRESHOLD_VELOCITY = 50;
+    private static final int SWIPE_MIN_DISTANCE = 25;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 20;
 
     @Override
     public boolean onDown(MotionEvent e) {
@@ -96,7 +96,6 @@ public class Quadrants extends AppCompatActivity implements GestureDetector.OnGe
             }
             if(diffX > 0 && diffY > 0){
                 if(checkSwipe(diffX, diffY, velocityX, velocityY)){
-                    myCharTree.onBottomRightSwipe();
                     onSwipeDownRight();
                     return true;
                 }
@@ -115,11 +114,8 @@ public class Quadrants extends AppCompatActivity implements GestureDetector.OnGe
         return result;
     }
     public boolean checkSwipe(float diffX, float diffY, float velocityX, float velocityY){
-        if (Math.abs(diffX) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY
-                && Math.abs(diffY) >SWIPE_MIN_DISTANCE && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY)
-            return true;
-        else
-            return false;
+        return (Math.abs(diffX) > SWIPE_MIN_DISTANCE) && (Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY)
+                && (Math.abs(diffY) > SWIPE_MIN_DISTANCE) && (Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY);
     }
 
     public void onSwipeUpRight(){
@@ -150,12 +146,27 @@ public class Quadrants extends AppCompatActivity implements GestureDetector.OnGe
     }
 
     public void onDelClick(View view) {
+        Log.d(TAG, "Trying to Delete");
         TextView outputText = (TextView) findViewById(R.id.outputText);
-        //String oldText = outputText.getText();
-
+        if(myCharTree.pointer != myCharTree.root){
+            myCharTree.pointer = myCharTree.root;
+        }
+        else if(outputText.getText().length() != 0) {
+            String oldText = outputText.getText().toString();
+            outputText.setText(oldText.substring(0, oldText.length() - 1));
+            Log.d(TAG, "made into a string");
+        }
     }
 
     public void onSpaceClick(View view) {
         handleText(" ");
+    }
+
+    public void populateView(CharacterTree tree){
+        if(tree.pointer != tree.root);
+        {
+
+        }
+
     }
 }

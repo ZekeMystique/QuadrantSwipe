@@ -61,7 +61,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Sample Text goes here."
         android:id="@+id/outputText"
-        android:layout_centerVertical="true"
+        android:textSize="30sp"
+        android:layout_alignTop="@+id/topLeft"
         android:layout_centerHorizontal="true" />
 
     <Button
