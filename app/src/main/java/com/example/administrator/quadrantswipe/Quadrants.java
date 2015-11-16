@@ -8,6 +8,7 @@ package com.example.administrator.quadrantswipe;
         import android.view.GestureDetector.OnGestureListener;
         import android.view.MotionEvent;
         import android.view.View;
+        import android.widget.TextView;
 
 public class Quadrants extends AppCompatActivity implements GestureDetector.OnGestureListener {
     GestureDetector detector;
@@ -17,10 +18,18 @@ public class Quadrants extends AppCompatActivity implements GestureDetector.OnGe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quadrants);
         detector = new GestureDetector(this, this);
-        View myView = new View(this);
+        //View myView = new View(this);
+
     }
 
-    private static int page = 1;
+    @Override
+    protected void onStart() {
+        super.onStart();
+    TextView outputText = (TextView) findViewById(R.id.outputText);
+    outputText.setText("");
+    }
+    private CharacterTree myCharTree = new CharacterTree();
+    //private static int page = 1;
     private static final String TAG = "Swipetesting";
     private static final int SWIPE_MIN_DISTANCE = 75;
     private static final int SWIPE_THRESHOLD_VELOCITY = 50;
@@ -87,6 +96,7 @@ public class Quadrants extends AppCompatActivity implements GestureDetector.OnGe
             }
             if(diffX > 0 && diffY > 0){
                 if(checkSwipe(diffX, diffY, velocityX, velocityY)){
+                    myCharTree.onBottomRightSwipe();
                     onSwipeDownRight();
                     return true;
                 }
@@ -111,16 +121,41 @@ public class Quadrants extends AppCompatActivity implements GestureDetector.OnGe
         else
             return false;
     }
+
     public void onSwipeUpRight(){
         Log.d(TAG, "Swipe Up-Right");
-        }
+        handleText(myCharTree.onTopRightSwipe());
+    }
+
     public void onSwipeDownRight(){
         Log.d(TAG, "Swipe Down-Right");
+        handleText(myCharTree.onBottomRightSwipe());
     }
+
     public void onSwipeDownLeft(){
         Log.d(TAG, "Swipe Down-Left");
+        handleText(myCharTree.onBottomLeftSwipe());
     }
+
     public void onSwipeUpLeft(){
         Log.d(TAG, "Swipe Up-Left");
+        handleText(myCharTree.onTopLeftSwipe());
+    }
+
+    public void handleText(String inText){
+        TextView outputText = (TextView) findViewById(R.id.outputText);
+        if(inText != null){
+        outputText.append(inText);
+        }
+    }
+
+    public void onDelClick(View view) {
+        TextView outputText = (TextView) findViewById(R.id.outputText);
+        //String oldText = outputText.getText();
+
+    }
+
+    public void onSpaceClick(View view) {
+        handleText(" ");
     }
 }
