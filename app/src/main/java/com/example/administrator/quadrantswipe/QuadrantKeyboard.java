@@ -10,8 +10,12 @@ package com.example.administrator.quadrantswipe;
         import android.view.View;
         import android.widget.TextView;
 
-public class Quadrants extends AppCompatActivity implements GestureDetector.OnGestureListener {
+public class QuadrantKeyboard extends AppCompatActivity implements GestureDetector.OnGestureListener {
     GestureDetector detector;
+
+    //This activity is now irrelevant.
+    //We can potentially add an activity for Settings if we have extra time
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
