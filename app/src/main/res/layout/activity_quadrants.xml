@@ -101,5 +101,5 @@
         android:onClick="onShiftClick"/>
 
 
-
+    <requestFocus/>
 </RelativeLayout>

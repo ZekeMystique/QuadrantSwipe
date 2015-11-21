@@ -20,7 +20,7 @@ public class QuadrantIME extends InputMethodService
     public CharacterTree myCharTree;
 
     //A custom view is needed so that we can attach an onTouchListener
-    QuadrantKeyboardView quadView;
+    View quadView;
 
 
     /*
@@ -35,7 +35,7 @@ public class QuadrantIME extends InputMethodService
         detector = new GestureDetector(this, new GestureListener());
 
         //Creates the user interface held in the custom view QuadrantKeyboardView
-        quadView = (QuadrantKeyboardView) getLayoutInflater().inflate(R.layout.quadrants_main, null);
+        quadView = getLayoutInflater().inflate(R.layout.activity_quadrants, null);
 
         //Attaches a listener to the custom view
         quadView.setOnTouchListener(new View.OnTouchListener() {
@@ -121,6 +121,19 @@ public class QuadrantIME extends InputMethodService
     public void onSwipeUpLeft(){
         Log.d(TAG, "Swipe Up-Left");
         handleText(myCharTree.onTopLeftSwipe());
+    }
+
+    public void onShiftClick(View view) {
+        if(!caps){
+            caps = true;
+        }
+        else{
+            caps = false;
+        }
+    }
+
+    public void onSpaceClick(View view) {
+        handleText(" ");
     }
 
     public void handleText(String inText){
