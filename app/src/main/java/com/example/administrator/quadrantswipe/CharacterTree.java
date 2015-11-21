@@ -7,6 +7,7 @@ public class CharacterTree {
 
     TreeNode root;
     TreeNode pointer;
+    StringBuffer outputBuffer;
 
     CharacterTree()
     {
@@ -38,6 +39,9 @@ public class CharacterTree {
 
         //Initialise pointer
         pointer = root;
+
+        //Initialise output buffer
+        outputBuffer = new StringBuffer();
     }
 
     private class TreeNode
@@ -73,6 +77,7 @@ public class CharacterTree {
         if (pointer.leaf)
         {
             String result = pointer.data;
+            outputBuffer.append(result);
             pointer = root;
             return result;
         }
