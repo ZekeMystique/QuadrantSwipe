@@ -7,6 +7,7 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputConnection;
+import android.widget.TextView;
 
 /**
  * Created by Rohan Dawson on 17/11/2015.
@@ -136,6 +137,13 @@ public class QuadrantIME extends InputMethodService
         handleText(" ");
     }
 
+    public void onDelClick(View view) {
+        Log.d(TAG, "Trying to Delete");
+        InputConnection ic = getCurrentInputConnection();
+        ic.deleteSurroundingText(1, 0);
+        }
+
+
     public void handleText(String inText){
         InputConnection ic = getCurrentInputConnection();
         if(caps){
@@ -147,7 +155,4 @@ public class QuadrantIME extends InputMethodService
             caps = false;
         }
     }
-
-
-
 }
