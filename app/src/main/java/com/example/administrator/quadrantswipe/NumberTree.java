@@ -1,41 +1,43 @@
 package com.example.administrator.quadrantswipe;
 
 /**
- * Created by Rohan Dawson on 13/11/2015.
+ * Created by Justin on 11/21/15.
  */
-public class CharacterTree {
-
+public class NumberTree {
     TreeNode root;
     TreeNode pointer;
     StringBuffer outputBuffer;
 
-    CharacterTree()
+    NumberTree()
     {
-        this(new String[]{"z", "v", "x", "k", "c", "p", "m", "w", "q", ".", "j", "," , "f", "g", "y", "b",
-                "d", "u", "h", "l", "a", "e", "i", "o", "t", "n", "s", "r"});
+        this(new String[]{
+                "1", "2", "3", ".",         // top left
+                "4", "5", "6", ",",         // top right
+                "7", "8", "!", "?",         // bottom left
+                "9", "0", "$", "#"});       // bottom right
 
     }
 
-    CharacterTree(String charArray[])
+    NumberTree(String numArray[])
     {
         //Create array of TreeNode leaves
-        TreeNode[] nodeArray = new TreeNode[28];
+        TreeNode[] nodeArray = new TreeNode[16];
 
         //Add an assert statement to say charArray.length() = 28
 
         //Initialise all leaves
-        for (int i=0; i<28; i++)
-            nodeArray[i] = new TreeNode(charArray[i], true);
+        for (int i=0; i<16; i++)
+            nodeArray[i] = new TreeNode(numArray[i], true);
 
         //Create and initialise branches
-        TreeNode br = new TreeNode(null, false, nodeArray[24], nodeArray[25], nodeArray[26], nodeArray[27]);
-        TreeNode bl = new TreeNode(null, false, nodeArray[20], nodeArray[21], nodeArray[22], nodeArray[23]);
-        TreeNode tr = new TreeNode(null, false, nodeArray[16], nodeArray[17], nodeArray[18], nodeArray[19]);
-        TreeNode tl = new TreeNode(null, false, null, null, null, null);
-        tl.topLeft = new TreeNode(null, false, nodeArray[0], nodeArray[1], nodeArray[2], nodeArray[3]);
-        tl.topRight = new TreeNode(null, false, nodeArray[4], nodeArray[5], nodeArray[6], nodeArray[7]);
-        tl.bottomLeft = new TreeNode(null, false, nodeArray[8], nodeArray[9], nodeArray[10], nodeArray[11]);
-        tl.bottomRight = new TreeNode(null, false, nodeArray[12], nodeArray[13], nodeArray[14], nodeArray[15]);
+        TreeNode tl = new TreeNode(null, false, nodeArray[0], nodeArray[1], nodeArray[2], nodeArray[3]);
+        TreeNode tr = new TreeNode(null, false, nodeArray[4], nodeArray[5], nodeArray[6], nodeArray[7]);
+        TreeNode bl = new TreeNode(null, false, nodeArray[8], nodeArray[9], nodeArray[10], nodeArray[1]);
+        TreeNode br = new TreeNode(null, false, nodeArray[12], nodeArray[13], nodeArray[14], nodeArray[15]);
+
+
+
+
         root = new TreeNode(null, false, tl, tr, bl, br);
 
         //Initialise pointer

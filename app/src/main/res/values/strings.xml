@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">QuadrantSwipe</string>
+
+    <string name="title_activity_number_screen">NumberScreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_number">NumberActivity</string>
+    <string name="title_activity_numbers">NumbersActivity</string>
 </resources>

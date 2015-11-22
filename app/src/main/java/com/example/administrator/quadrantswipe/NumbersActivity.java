@@ -1,7 +1,7 @@
 package com.example.administrator.quadrantswipe;
 
-        import android.content.Intent;
-        import android.os.Bundle;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -9,34 +9,32 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-public class QuadrantKeyboard extends AppCompatActivity implements GestureDetector.OnGestureListener {
+
+public class NumbersActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
     GestureDetector detector;
 
-    //This activity is now irrelevant.
-    //We can potentially add an activity for Settings if we have extra time
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quadrants);
+        setContentView(R.layout.activity_numbers);
         detector = new GestureDetector(this, this);
-        //View myView = new View(this);
 
     }
 
     public void onClick(View view){
-        Intent i = new Intent(this, NumbersActivity.class);
+        Intent i = new Intent(this, QuadrantKeyboard.class);
         startActivity(i);
-
     }
+
     @Override
     protected void onStart() {
         super.onStart();
-    TextView outputText = (TextView) findViewById(R.id.outputText);
-    outputText.setText("");
+        TextView outputText = (TextView) findViewById(R.id.outputText);
+        outputText.setText("");
     }
-    private CharacterTree myCharTree = new CharacterTree();
+    private NumberTree myNumTree = new NumberTree();
     //private static int page = 1;
     private static final String TAG = "Swipetesting";
     private static final int SWIPE_MIN_DISTANCE = 25;
@@ -129,22 +127,22 @@ public class QuadrantKeyboard extends AppCompatActivity implements GestureDetect
 
     public void onSwipeUpRight(){
         Log.d(TAG, "Swipe Up-Right");
-        handleText(myCharTree.onTopRightSwipe());
+        handleText(myNumTree.onTopRightSwipe());
     }
 
     public void onSwipeDownRight(){
         Log.d(TAG, "Swipe Down-Right");
-        handleText(myCharTree.onBottomRightSwipe());
+        handleText(myNumTree.onBottomRightSwipe());
     }
 
     public void onSwipeDownLeft(){
         Log.d(TAG, "Swipe Down-Left");
-        handleText(myCharTree.onBottomLeftSwipe());
+        handleText(myNumTree.onBottomLeftSwipe());
     }
 
     public void onSwipeUpLeft(){
         Log.d(TAG, "Swipe Up-Left");
-        handleText(myCharTree.onTopLeftSwipe());
+        handleText(myNumTree.onTopLeftSwipe());
     }
 
     public void handleText(String inText){
@@ -162,8 +160,8 @@ public class QuadrantKeyboard extends AppCompatActivity implements GestureDetect
     public void onDelClick(View view) {
         Log.d(TAG, "Trying to Delete");
         TextView outputText = (TextView) findViewById(R.id.outputText);
-        if(myCharTree.pointer != myCharTree.root){
-            myCharTree.pointer = myCharTree.root;
+        if(myNumTree.pointer != myNumTree.root){
+            myNumTree.pointer = myNumTree.root;
         }
         else if(outputText.getText().length() != 0) {
             String oldText = outputText.getText().toString();
@@ -192,4 +190,5 @@ public class QuadrantKeyboard extends AppCompatActivity implements GestureDetect
         }
 
     }
+
 }
