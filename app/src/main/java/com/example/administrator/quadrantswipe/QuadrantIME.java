@@ -4,6 +4,7 @@ import android.inputmethodservice.InputMethodService;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.ExtractedText;
@@ -142,6 +143,14 @@ public class QuadrantIME extends InputMethodService
         InputConnection ic = getCurrentInputConnection();
         ic.deleteSurroundingText(1, 0);
         updatePreview();
+    }
+
+    public void onEnterClick(View view) {
+
+
+        InputConnection ic = getCurrentInputConnection();
+        KeyEvent myKey = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER);
+        ic.sendKeyEvent(myKey);
     }
 
 
