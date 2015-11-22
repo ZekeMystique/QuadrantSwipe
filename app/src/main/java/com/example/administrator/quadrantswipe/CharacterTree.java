@@ -93,6 +93,8 @@ public class CharacterTree {
         {
             String result = pointer.data;
             pointer = root;
+
+
             return result;
         }
         else
@@ -153,4 +155,7 @@ public class CharacterTree {
         return outputBuffer;
     }
 
+
+
 }
+

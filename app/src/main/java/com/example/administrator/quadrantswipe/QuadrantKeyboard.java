@@ -1,14 +1,12 @@
 package com.example.administrator.quadrantswipe;
 
-        import android.gesture.GestureOverlayView;
-        import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
-        import android.util.Log;
-        import android.view.GestureDetector;
-        import android.view.GestureDetector.OnGestureListener;
-        import android.view.MotionEvent;
-        import android.view.View;
-        import android.widget.TextView;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.TextView;
 
 public class QuadrantKeyboard extends AppCompatActivity implements GestureDetector.OnGestureListener {
     GestureDetector detector;
@@ -32,6 +30,7 @@ public class QuadrantKeyboard extends AppCompatActivity implements GestureDetect
     TextView outputText = (TextView) findViewById(R.id.outputText);
     outputText.setText("");
     }
+
     private CharacterTree myCharTree = new CharacterTree();
     //private static int page = 1;
     private static final String TAG = "Swipetesting";
@@ -75,6 +74,11 @@ public class QuadrantKeyboard extends AppCompatActivity implements GestureDetect
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         boolean result = false;
         try {
+            String[] letterArray ={
+                    "z", "v", "x", "k", "c", "p", "m",
+                    "w", "q", ".", "j", ",", "f", "g",
+                    "y", "b", "d", "u", "h", "l", "a",
+                    "e", "i", "o", "t", "n","s", "r"};
             float diffY = e2.getY() - e1.getY();
             float diffX = e2.getX() - e1.getX();
             /*if (Math.abs(diffX) > Math.abs(diffY)) {
@@ -108,6 +112,28 @@ public class QuadrantKeyboard extends AppCompatActivity implements GestureDetect
             if(diffX > 0 && diffY < 0){
                 if(checkSwipe(diffX, diffY, velocityX, velocityY)){
                     onSwipeUpRight();
+
+                    changeText(letterArray);
+                    TextView newText = (TextView)findViewById(R.id.topLeft);
+                    String newVar = letterArray[16];
+                    newText.setText(newVar);
+
+                    changeText(letterArray);
+                    TextView newText2 = (TextView)findViewById(R.id.botLeft);
+                    String newVar2 = letterArray[18];
+                    newText2.setText(newVar2);
+
+                    changeText(letterArray);
+                    TextView newText3 = (TextView)findViewById(R.id.topRight);
+                    String newVar3 = letterArray[17];
+                    newText3.setText(newVar3);
+
+                    changeText(letterArray);
+                    TextView newText4 = (TextView)findViewById(R.id.botRight);
+                    String newVar4 = letterArray[19];
+                    newText4.setText(newVar4);
+
+
                     return true;
                 }
             }
@@ -122,6 +148,12 @@ public class QuadrantKeyboard extends AppCompatActivity implements GestureDetect
         return (Math.abs(diffX) > SWIPE_MIN_DISTANCE) && (Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY)
                 && (Math.abs(diffY) > SWIPE_MIN_DISTANCE) && (Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY);
     }
+    public void changeText(String[]letterArray){
+        TextView newText = (TextView)findViewById(R.id.topRight);
+        String newVar = letterArray[1];
+        newText.setText(newVar);
+    }
+
 
     public void onSwipeUpRight(){
         Log.d(TAG, "Swipe Up-Right");

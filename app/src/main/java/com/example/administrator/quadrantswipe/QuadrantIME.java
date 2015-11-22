@@ -1,9 +1,9 @@
 package com.example.administrator.quadrantswipe;
 
 import android.inputmethodservice.InputMethodService;
+
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputConnection;
@@ -14,6 +14,7 @@ import android.view.inputmethod.InputConnection;
 public class QuadrantIME extends InputMethodService
        // implements GestureDetector.OnGestureListener
 {
+
 
 
     GestureDetector detector;
@@ -60,6 +61,8 @@ public class QuadrantIME extends InputMethodService
                 if(diffX < 0 && diffY < 0){
                     if(checkSwipe(diffX, diffY, velocityX, velocityY)){
                         onSwipeUpLeft();
+
+
                         return true;
                     }
                 }
@@ -78,6 +81,8 @@ public class QuadrantIME extends InputMethodService
                 if(diffX > 0 && diffY < 0){
                     if(checkSwipe(diffX, diffY, velocityX, velocityY)){
                         onSwipeUpRight();
+
+
                         return true;
                     }
                 }
