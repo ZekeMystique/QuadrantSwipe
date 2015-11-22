@@ -6,6 +6,8 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.ExtractedText;
+import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
 import android.widget.TextView;
 
@@ -58,26 +60,26 @@ public class QuadrantIME extends InputMethodService
                 float diffY = e2.getY() - e1.getY();
                 float diffX = e2.getX() - e1.getX();
 
-                if(diffX < 0 && diffY < 0){
-                    if(checkSwipe(diffX, diffY, velocityX, velocityY)){
+                if (diffX < 0 && diffY < 0) {
+                    if (checkSwipe(diffX, diffY, velocityX, velocityY)) {
                         onSwipeUpLeft();
                         return true;
                     }
                 }
-                if(diffX < 0 && diffY > 0){
-                    if(checkSwipe(diffX, diffY, velocityX, velocityY)){
+                if (diffX < 0 && diffY > 0) {
+                    if (checkSwipe(diffX, diffY, velocityX, velocityY)) {
                         onSwipeDownLeft();
                         return true;
                     }
                 }
-                if(diffX > 0 && diffY > 0){
-                    if(checkSwipe(diffX, diffY, velocityX, velocityY)){
+                if (diffX > 0 && diffY > 0) {
+                    if (checkSwipe(diffX, diffY, velocityX, velocityY)) {
                         onSwipeDownRight();
                         return true;
                     }
                 }
-                if(diffX > 0 && diffY < 0){
-                    if(checkSwipe(diffX, diffY, velocityX, velocityY)){
+                if (diffX > 0 && diffY < 0) {
+                    if (checkSwipe(diffX, diffY, velocityX, velocityY)) {
                         onSwipeUpRight();
                         return true;
                     }
@@ -92,43 +94,41 @@ public class QuadrantIME extends InputMethodService
     }
 
 
-
     private static final String TAG = "Swipetesting";
     private static final int SWIPE_MIN_DISTANCE = 25;
     private static final int SWIPE_THRESHOLD_VELOCITY = 20;
     private static boolean caps = false;
 
 
-    public boolean checkSwipe(float diffX, float diffY, float velocityX, float velocityY){
+    public boolean checkSwipe(float diffX, float diffY, float velocityX, float velocityY) {
         return (Math.abs(diffX) > SWIPE_MIN_DISTANCE) && (Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY)
                 && (Math.abs(diffY) > SWIPE_MIN_DISTANCE) && (Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY);
     }
 
-    public void onSwipeUpRight(){
+    public void onSwipeUpRight() {
         Log.d(TAG, "Swipe Up-Right");
         handleText(myCharTree.onTopRightSwipe());
     }
 
-    public void onSwipeDownRight(){
+    public void onSwipeDownRight() {
         Log.d(TAG, "Swipe Down-Right");
         handleText(myCharTree.onBottomRightSwipe());
     }
 
-    public void onSwipeDownLeft(){
+    public void onSwipeDownLeft() {
         Log.d(TAG, "Swipe Down-Left");
         handleText(myCharTree.onBottomLeftSwipe());
     }
 
-    public void onSwipeUpLeft(){
+    public void onSwipeUpLeft() {
         Log.d(TAG, "Swipe Up-Left");
         handleText(myCharTree.onTopLeftSwipe());
     }
 
     public void onShiftClick(View view) {
-        if(!caps){
+        if (!caps) {
             caps = true;
-        }
-        else{
+        } else {
             caps = false;
         }
     }
@@ -141,18 +141,27 @@ public class QuadrantIME extends InputMethodService
         Log.d(TAG, "Trying to Delete");
         InputConnection ic = getCurrentInputConnection();
         ic.deleteSurroundingText(1, 0);
-        }
+        updatePreview();
+    }
 
 
-    public void handleText(String inText){
+    public void handleText(String inText) {
         InputConnection ic = getCurrentInputConnection();
-        if(caps){
+        if (caps) {
             inText = inText.toUpperCase();
         }
 
-        if(inText != null){
+        if (inText != null) {
             ic.commitText(inText, 1);
             caps = false;
         }
+        updatePreview();
+    }
+    public void updatePreview(){
+        InputConnection ic = getCurrentInputConnection();
+        ExtractedTextRequest myReq = new ExtractedTextRequest();
+        //ic.getExtractedText(myReq, 0);
+        TextView outputText = (TextView) quadView.findViewById(R.id.outputText);
+        outputText.setText(ic.getExtractedText(myReq, 0).text);
     }
 }
