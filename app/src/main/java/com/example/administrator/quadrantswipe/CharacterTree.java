@@ -11,8 +11,10 @@ public class CharacterTree {
 
     CharacterTree()
     {
-        this(new String[]{"z", "v", "x", "k", "c", "p", "m", "w", "q", ".", "j", "," , "f", "g", "y", "b",
-                "d", "u", "h", "l", "a", "e", "i", "o", "t", "n", "s", "r"});
+        this(new String[]{
+            "i", "a", "l", "h", "o", "n", "r", "s", "m", "u", "e", "t",
+            "q", "z", "j", "x", "v", "w", "p", "f", ",", ".", "y", "g", "b", "k", "c", "d"
+        });
     }
 
     CharacterTree(String charArray[])
@@ -27,14 +29,16 @@ public class CharacterTree {
             nodeArray[i] = new TreeNode(charArray[i], true);
 
         //Create and initialise branches
-        TreeNode br = new TreeNode(null, false, nodeArray[24], nodeArray[25], nodeArray[26], nodeArray[27]);
-        TreeNode bl = new TreeNode(null, false, nodeArray[20], nodeArray[21], nodeArray[22], nodeArray[23]);
-        TreeNode tr = new TreeNode(null, false, nodeArray[16], nodeArray[17], nodeArray[18], nodeArray[19]);
-        TreeNode tl = new TreeNode(null, false, null, null, null, null);
-        tl.topLeft = new TreeNode(null, false, nodeArray[0], nodeArray[1], nodeArray[2], nodeArray[3]);
-        tl.topRight = new TreeNode(null, false, nodeArray[4], nodeArray[5], nodeArray[6], nodeArray[7]);
-        tl.bottomLeft = new TreeNode(null, false, nodeArray[8], nodeArray[9], nodeArray[10], nodeArray[11]);
-        tl.bottomRight = new TreeNode(null, false, nodeArray[12], nodeArray[13], nodeArray[14], nodeArray[15]);
+        TreeNode tl = new TreeNode(null, false, nodeArray[0], nodeArray[1], nodeArray[2], nodeArray[3]);
+        TreeNode tr = new TreeNode(null, false, nodeArray[4], nodeArray[5], nodeArray[6], nodeArray[7]);
+        TreeNode bl = new TreeNode(null, false, nodeArray[8], nodeArray[9], nodeArray[10], nodeArray[11]);
+        TreeNode br = new TreeNode(null, false, null, null, null, null);
+
+        br.topLeft = new TreeNode(null, false, nodeArray[12], nodeArray[13], nodeArray[14], nodeArray[15]);
+        br.topRight = new TreeNode(null, false, nodeArray[16], nodeArray[17], nodeArray[18], nodeArray[19]);
+        br.bottomLeft = new TreeNode(null, false, nodeArray[20], nodeArray[21], nodeArray[22], nodeArray[23]);
+        br.bottomRight = new TreeNode(null, false, nodeArray[24], nodeArray[25], nodeArray[26], nodeArray[27]);
+
         root = new TreeNode(null, false, tl, tr, bl, br);
 
         //Initialise pointer
@@ -125,6 +129,11 @@ public class CharacterTree {
         }
         else
             return null;
+    }
+
+    public void resetPointer()
+    {
+        pointer = root;
     }
 
     public String print()
