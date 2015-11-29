@@ -127,7 +127,7 @@
         android:layout_alignStart="@+id/shift"
         android:paddingLeft="59dp"
         android:paddingRight="59dp"
-        android:onClick="onClick"/>
+        android:onClick="onNumbersClick"/>
 
 
 </RelativeLayout>

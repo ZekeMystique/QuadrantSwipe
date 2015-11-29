@@ -7,8 +7,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.administrator.quadrantswipe.NumbersActivity"
-    tools:showIn="@layout/activity_numbers">
+    tools:context=".Quadrants">
+    <!-- tools:context="com.example.administrator.quadrantswipe.NumbersActivity"
+     tools:showIn="@layout/activity_numbers">   -->
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -17,11 +19,12 @@
         android:text="1   2\n\n3   ."
         android:lines = "3"
         android:typeface = "monospace"
-        android:background="@drawable/text_back"
+        android:background="#ffffff"
         android:id="@+id/topLeft"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:padding="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,11 +33,12 @@
         android:text="4   5\n\n6   ,"
         android:lines = "3"
         android:typeface = "monospace"
-        android:background="@drawable/text_back"
+        android:background="#ffffff"
         android:id="@+id/topRight"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:padding="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,11 +47,12 @@
         android:text="7   8\n\n!   ?"
         android:lines = "3"
         android:typeface = "monospace"
-        android:background="@drawable/text_back"
+        android:background="#ffffff"
         android:id="@+id/botLeft"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:padding="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -56,11 +61,12 @@
         android:text="9   0\n\n$   #"
         android:lines = "3"
         android:typeface = "monospace"
-        android:background="@drawable/text_back"
+        android:background="#ffffff"
         android:id="@+id/botRight"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:padding="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -130,6 +136,59 @@
         android:paddingRight="59dp"
         android:onClick="onClick"/>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageTopLeft"
+        android:src="@drawable/slim_arrow"
+        android:layout_alignTop="@+id/topLeft"
+        android:layout_alignRight="@+id/botLeft"
+        android:layout_alignEnd="@+id/botLeft"
+        android:layout_alignBottom="@+id/topLeft"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingTop="30dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageTopRight"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/topRight"
+        android:layout_alignEnd="@+id/topRight"
+        android:src="@drawable/slim_arrow"
+        android:layout_alignBottom="@+id/topRight"
+        android:layout_alignLeft="@+id/topRight"
+        android:layout_alignStart="@+id/topRight"
+        android:paddingRight="10dp"
+        android:paddingTop="30dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageBottomLeft"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/slim_arrow_down"
+        android:layout_alignTop="@+id/botLeft"
+        android:layout_alignRight="@+id/botLeft"
+        android:layout_alignEnd="@+id/botLeft"
+        android:paddingBottom="30dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageBottomRight"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/slim_arrow_down"
+        android:layout_alignTop="@+id/botRight"
+        android:layout_alignLeft="@+id/botRight"
+        android:layout_alignStart="@+id/botRight"
+        android:paddingRight="10dp"
+        android:paddingBottom="30dp" />
 
 
 </RelativeLayout>

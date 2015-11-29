@@ -1,6 +1,5 @@
 package com.example.administrator.quadrantswipe;
 
-        import android.content.Intent;
         import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,6 +7,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.content.Intent;
 
 public class QuadrantKeyboard extends AppCompatActivity implements GestureDetector.OnGestureListener {
     GestureDetector detector;

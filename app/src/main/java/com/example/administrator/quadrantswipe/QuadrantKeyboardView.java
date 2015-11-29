@@ -1,15 +1,11 @@
 package com.example.administrator.quadrantswipe;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 /**
  * Created by Rohan Dawson on 19/11/2015.
@@ -18,6 +14,7 @@ public class QuadrantKeyboardView extends View {
 
     Paint paint;
     CharacterTree myCharTree;
+    NumberTree myNumTree;
 
     //Constructor to build instance from XML file
     public QuadrantKeyboardView(Context context, AttributeSet attrs) {

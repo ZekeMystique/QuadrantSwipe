@@ -3,14 +3,13 @@ package com.example.administrator.quadrantswipe;
 import android.inputmethodservice.InputMethodService;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.ExtractedText;
 import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
 import android.widget.TextView;
+
 
 /**
  * Created by Rohan Dawson on 17/11/2015.
@@ -21,11 +20,15 @@ public class QuadrantIME extends InputMethodService
 
 
     GestureDetector detector;
+    GestureDetector detectorForNumbers;
     public CharacterTree myCharTree;
+    public NumberTree myNumTree;
+    public Boolean onNumbersPage = false;
+    public Boolean onLettersPage = false;
 
     //A custom view is needed so that we can attach an onTouchListener
     View quadView;
-
+    View quadViewForNumbers;
 
     /*
     * Text input requires a service, not an activity.
@@ -36,10 +39,25 @@ public class QuadrantIME extends InputMethodService
     @Override
     public View onCreateInputView() {
         myCharTree = new CharacterTree();
+
+        onLettersPage = true;
+        onNumbersPage = false;
+
         detector = new GestureDetector(this, new GestureListener());
 
         //Creates the user interface held in the custom view QuadrantKeyboardView
         quadView = getLayoutInflater().inflate(R.layout.activity_quadrants, null);
+
+    // ** Justin Messing around **
+//        Button numbersButton = (Button)findViewById(R.id.numbersButton);
+//        numbersButton.setOnClickListener(
+//                new Button.onClickListener(){
+//                    public void onClick(View v){
+//                        TextView topLeft = (TextView)findViewById(R.id.topLeft);
+//                        topLeft.setText("It Works");
+//                    }
+//                }
+//        );
 
         //Attaches a listener to the custom view
         quadView.setOnTouchListener(new View.OnTouchListener() {
@@ -52,6 +70,7 @@ public class QuadrantIME extends InputMethodService
 
         return quadView;
     }
+
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
@@ -108,22 +127,55 @@ public class QuadrantIME extends InputMethodService
 
     public void onSwipeUpRight() {
         Log.d(TAG, "Swipe Up-Right");
-        handleText(myCharTree.onTopRightSwipe());
+//        handleText(myCharTree.onTopRightSwipe());
+        if(onNumbersPage)
+        {
+            handleText(myNumTree.onTopRightSwipe());
+        }
+        else
+        {
+            handleText(myCharTree.onTopRightSwipe());
+        }
     }
 
     public void onSwipeDownRight() {
         Log.d(TAG, "Swipe Down-Right");
-        handleText(myCharTree.onBottomRightSwipe());
+//        handleText(myCharTree.onBottomRightSwipe());
+        if (onNumbersPage)
+        {
+            handleText(myNumTree.onBottomRightSwipe());
+        }
+        else
+        {
+            handleText(myCharTree.onBottomRightSwipe());
+        }
+
     }
 
     public void onSwipeDownLeft() {
         Log.d(TAG, "Swipe Down-Left");
-        handleText(myCharTree.onBottomLeftSwipe());
+//        handleText(myCharTree.onBottomLeftSwipe());
+        if (onNumbersPage)
+        {
+            handleText(myNumTree.onBottomLeftSwipe());
+        }
+        else
+        {
+            handleText(myCharTree.onBottomLeftSwipe());
+        }
     }
 
     public void onSwipeUpLeft() {
         Log.d(TAG, "Swipe Up-Left");
-        handleText(myCharTree.onTopLeftSwipe());
+//        handleText(myCharTree.onTopLeftSwipe());
+        if (onNumbersPage)
+        {
+            handleText(myNumTree.onTopLeftSwipe());
+        }
+        else
+        {
+            handleText(myCharTree.onTopLeftSwipe());
+        }
     }
 
     public void onShiftClick(View view) {
@@ -153,6 +205,34 @@ public class QuadrantIME extends InputMethodService
         ic.sendKeyEvent(myKey);
     }
 
+
+    public void onNumbersClick(View view) {
+        Log.d(TAG, "Clicking to go to Numbers");
+
+        myNumTree = new NumberTree();
+
+        onNumbersPage = true;
+        onLettersPage = false;
+
+
+
+
+//        detectorForNumbers = new GestureDetector(this, new GestureListener());
+//
+        //Creates the user interface held in the custom view QuadrantKeyboardView
+//        quadViewForNumbers = getLayoutInflater().inflate(R.layout.activity_numbers, null);
+//
+//        //Attaches a listener to the custom view
+//        quadViewForNumbers.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                detectorForNumbers.onTouchEvent(event);
+//                return true;
+//            }
+//        });
+//
+//        return quadViewForNumbers;
+    }
 
     public void handleText(String inText) {
         InputConnection ic = getCurrentInputConnection();
