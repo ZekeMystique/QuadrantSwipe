@@ -26,6 +26,7 @@ public class QuadrantIME extends InputMethodService
     public NumberTree myNumTree;
     public Boolean onNumbersPage = false;
     public Boolean onLettersPage = false;
+    public Boolean inputtedNumber = false;
 
     //A custom view is needed so that we can attach an onTouchListener
     View quadView;
@@ -139,6 +140,30 @@ public class QuadrantIME extends InputMethodService
         if(onNumbersPage)
         {
             handleText(myNumTree.onTopRightSwipe());
+
+            TextView myText0 = (TextView)quadView.findViewById(R.id.topLeft);
+            myText0.setText("4    \n\n     ");
+            TextView myText1 = (TextView)quadView.findViewById(R.id.topRight);
+            myText1.setText("5    \n\n     ");
+            TextView myText2 = (TextView)quadView.findViewById(R.id.botLeft);
+            myText2.setText("6    \n\n     ");
+            TextView myText3 = (TextView)quadView.findViewById(R.id.botRight);
+            myText3.setText(",    \n\n     ");
+
+            if (inputtedNumber)
+            {
+                TextView myText4 = (TextView)quadView.findViewById(R.id.topLeft);
+                myText4.setText("1   2\n\n3   .");
+                TextView myText5 = (TextView)quadView.findViewById(R.id.topRight);
+                myText5.setText("4   5\n\n6   ,");
+                TextView myText6 = (TextView)quadView.findViewById(R.id.botLeft);
+                myText6.setText("7   8\n\n!   ?");
+                TextView myText7 = (TextView)quadView.findViewById(R.id.botRight);
+                myText7.setText("9   0\n\n@   #");
+
+
+            }
+            inputtedNumber = true;
         }
         else
         {
@@ -152,6 +177,30 @@ public class QuadrantIME extends InputMethodService
         if (onNumbersPage)
         {
             handleText(myNumTree.onBottomRightSwipe());
+
+            TextView myText0 = (TextView)quadView.findViewById(R.id.topLeft);
+            myText0.setText("9    \n\n     ");
+            TextView myText1 = (TextView)quadView.findViewById(R.id.topRight);
+            myText1.setText("0    \n\n     ");
+            TextView myText2 = (TextView)quadView.findViewById(R.id.botLeft);
+            myText2.setText("@    \n\n     ");
+            TextView myText3 = (TextView)quadView.findViewById(R.id.botRight);
+            myText3.setText("#    \n\n     ");
+
+            if (inputtedNumber)
+            {
+                TextView myText4 = (TextView)quadView.findViewById(R.id.topLeft);
+                myText4.setText("1   2\n\n3   .");
+                TextView myText5 = (TextView)quadView.findViewById(R.id.topRight);
+                myText5.setText("4   5\n\n6   ,");
+                TextView myText6 = (TextView)quadView.findViewById(R.id.botLeft);
+                myText6.setText("7   8\n\n!   ?");
+                TextView myText7 = (TextView)quadView.findViewById(R.id.botRight);
+                myText7.setText("9   0\n\n@   #");
+
+
+            }
+            inputtedNumber = true;
         }
         else
         {
@@ -174,6 +223,21 @@ public class QuadrantIME extends InputMethodService
             myText2.setText("!    \n\n     ");
             TextView myText3 = (TextView)quadView.findViewById(R.id.botRight);
             myText3.setText("?    \n\n     ");
+
+            if (inputtedNumber)
+            {
+                TextView myText4 = (TextView)quadView.findViewById(R.id.topLeft);
+                myText4.setText("1   2\n\n3   .");
+                TextView myText5 = (TextView)quadView.findViewById(R.id.topRight);
+                myText5.setText("4   5\n\n6   ,");
+                TextView myText6 = (TextView)quadView.findViewById(R.id.botLeft);
+                myText6.setText("7   8\n\n!   ?");
+                TextView myText7 = (TextView)quadView.findViewById(R.id.botRight);
+                myText7.setText("9   0\n\n@   #");
+
+                inputtedNumber = false;
+            }
+            inputtedNumber = true;
         }
         else
         {
@@ -188,7 +252,30 @@ public class QuadrantIME extends InputMethodService
         {
             handleText(myNumTree.onTopLeftSwipe());
 
+            TextView myText0 = (TextView)quadView.findViewById(R.id.topLeft);
+            myText0.setText("1    \n\n     ");
+            TextView myText1 = (TextView)quadView.findViewById(R.id.topRight);
+            myText1.setText("2    \n\n     ");
+            TextView myText2 = (TextView)quadView.findViewById(R.id.botLeft);
+            myText2.setText("3    \n\n     ");
+            TextView myText3 = (TextView)quadView.findViewById(R.id.botRight);
+            myText3.setText(".    \n\n     ");
 
+
+            if (inputtedNumber)
+            {
+                TextView myText4 = (TextView)quadView.findViewById(R.id.topLeft);
+                myText4.setText("1   2\n\n3   .");
+                TextView myText5 = (TextView)quadView.findViewById(R.id.topRight);
+                myText5.setText("4   5\n\n6   ,");
+                TextView myText6 = (TextView)quadView.findViewById(R.id.botLeft);
+                myText6.setText("7   8\n\n!   ?");
+                TextView myText7 = (TextView)quadView.findViewById(R.id.botRight);
+                myText7.setText("9   0\n\n@   #");
+
+
+            }
+            inputtedNumber = true;
         }
         else
         {
@@ -229,38 +316,37 @@ public class QuadrantIME extends InputMethodService
 
         myNumTree = new NumberTree();
 
-        onNumbersPage = true;
-        onLettersPage = false;
-
-
+       // onNumbersPage = true;
+       // onLettersPage = false;
 
         Button myButton = (Button)quadView.findViewById(R.id.numbersButton);
-        myButton.setText("letters");
 
-
-
-        TextView myText0 = (TextView)quadView.findViewById(R.id.topLeft);
-        myText0.setText("1   2\n\n3   .");
-        TextView myText1 = (TextView)quadView.findViewById(R.id.topRight);
-        myText1.setText("4   5\n\n6   ,");
-        TextView myText2 = (TextView)quadView.findViewById(R.id.botLeft);
-        myText2.setText("7   8\n\n!   ?");
-        TextView myText3 = (TextView)quadView.findViewById(R.id.botRight);
-        myText3.setText("9   0\n\n@   #");
 
 
 
         if(onNumbersPage)
         {
-            onNumbersPage = false;
-            onLettersPage = true;
-            myButton.setText("letters");
-        }
-        if(!onNumbersPage)
-        {
             onNumbersPage = true;
             onLettersPage = false;
             myButton.setText("numbers");
+
+
+        }
+        else
+        {
+            onNumbersPage = true;
+            onLettersPage = false;
+            myButton.setText("letters");
+
+            TextView myText0 = (TextView)quadView.findViewById(R.id.topLeft);
+            myText0.setText("1   2\n\n3   .");
+            TextView myText1 = (TextView)quadView.findViewById(R.id.topRight);
+            myText1.setText("4   5\n\n6   ,");
+            TextView myText2 = (TextView)quadView.findViewById(R.id.botLeft);
+            myText2.setText("7   8\n\n!   ?");
+            TextView myText3 = (TextView)quadView.findViewById(R.id.botRight);
+            myText3.setText("9   0\n\n@   #");
+
         }
 
 
@@ -286,10 +372,13 @@ public class QuadrantIME extends InputMethodService
         updatePreview();
     }
     public void updatePreview(){
+
         InputConnection ic = getCurrentInputConnection();
         ExtractedTextRequest myReq = new ExtractedTextRequest();
         //ic.getExtractedText(myReq, 0);
         TextView outputText = (TextView) quadView.findViewById(R.id.outputText);
         outputText.setText(ic.getExtractedText(myReq, 0).text);
+
+
     }
 }

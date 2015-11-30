@@ -15,6 +15,8 @@ public class CharacterTree {
                 "i", "a", "l", "h", "o", "n", "r", "s", "m", "u", "e", "t",
                 "q", "z", "j", "x", "v", "w", "p", "f", ",", ".", "y", "g", "b", "k", "c", "d"
         });
+
+
     }
 
     CharacterTree(String charArray[])

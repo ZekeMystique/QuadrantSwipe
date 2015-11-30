@@ -153,7 +153,7 @@
         android:layout_alignBottom="@+id/topLeft"
         android:layout_alignRight="@+id/topLeft"
         android:layout_alignEnd="@+id/topLeft"
-        android:paddingLeft="2dp" />
+        android:paddingTop="10dp" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -166,7 +166,8 @@
         android:layout_alignBottom="@+id/topRight"
         android:layout_alignLeft="@+id/topRight"
         android:layout_alignStart="@+id/topRight"
-        android:paddingRight="2dp" />
+        android:paddingRight="2dp"
+        android:paddingTop="10dp" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -177,7 +178,7 @@
         android:layout_alignRight="@+id/botLeft"
         android:layout_alignEnd="@+id/botLeft"
         android:layout_alignTop="@+id/botLeft"
-        android:paddingLeft="2dp" />
+        android:paddingBottom="10dp" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -190,7 +191,8 @@
         android:layout_alignLeft="@+id/imageView8"
         android:layout_alignStart="@+id/imageView8"
         android:layout_alignTop="@+id/botRight"
-        android:paddingRight="2dp" />
+        android:paddingRight="2dp"
+        android:paddingBottom="10dp" />
 
 
 </RelativeLayout>
