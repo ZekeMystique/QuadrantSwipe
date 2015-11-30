@@ -58,7 +58,6 @@ public class QuadrantKeyboard extends AppCompatActivity implements GestureDetect
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
         return false;
     }
-
     @Override
     public void onLongPress(MotionEvent e) {
 
