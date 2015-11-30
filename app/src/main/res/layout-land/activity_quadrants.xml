@@ -85,20 +85,20 @@
         android:layout_height="wrap_content"
         android:text="DEL"
         android:id="@+id/del"
-        android:onClick="onDelClick"
-        android:layout_above="@+id/botRight"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/space"
+        android:layout_toEndOf="@+id/space"
+        android:onClick="onDelClick"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" ^ "
         android:id="@+id/shift"
-        android:onClick="onShiftClick"
-        android:layout_above="@+id/botLeft"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignBottom="@+id/botLeft"
+        android:layout_toLeftOf="@+id/space"
+        android:layout_toStartOf="@+id/space"
+        android:onClick="onShiftClick"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -106,8 +106,9 @@
         android:text="RET"
         android:id="@+id/enter"
         android:onClick="onEnterClick"
-        android:layout_above="@+id/numToggle"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/del"
+        android:layout_toRightOf="@+id/space"
+        android:layout_toEndOf="@+id/space" />
 
     <Button
         android:layout_width="wrap_content"
@@ -116,7 +117,8 @@
         android:id="@+id/numToggle"
         android:onClick="onNumClick"
         android:layout_above="@+id/space"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignLeft="@+id/shift"
+        android:layout_alignStart="@+id/shift" />
 
     <requestFocus/>
 
