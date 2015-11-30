@@ -110,6 +110,17 @@
         android:layout_toRightOf="@+id/space"
         android:layout_toEndOf="@+id/space" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="123"
+        android:id="@+id/numToggle"
+        android:onClick="onNumClick"
+        android:layout_above="@+id/space"
+        android:layout_alignLeft="@+id/shift"
+        android:layout_alignStart="@+id/shift" />
 
     <requestFocus/>
+
+
 </RelativeLayout>
