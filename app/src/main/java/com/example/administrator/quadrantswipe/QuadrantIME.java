@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
 import android.widget.TextView;
+import android.widget.Button;
 
 
 /**
@@ -165,6 +166,14 @@ public class QuadrantIME extends InputMethodService
         if (onNumbersPage)
         {
             handleText(myNumTree.onBottomLeftSwipe());
+            TextView myText0 = (TextView)quadView.findViewById(R.id.topLeft);
+            myText0.setText("7    \n\n     ");
+            TextView myText1 = (TextView)quadView.findViewById(R.id.topRight);
+            myText1.setText("8    \n\n     ");
+            TextView myText2 = (TextView)quadView.findViewById(R.id.botLeft);
+            myText2.setText("!    \n\n     ");
+            TextView myText3 = (TextView)quadView.findViewById(R.id.botRight);
+            myText3.setText("?    \n\n     ");
         }
         else
         {
@@ -178,6 +187,8 @@ public class QuadrantIME extends InputMethodService
         if (onNumbersPage)
         {
             handleText(myNumTree.onTopLeftSwipe());
+
+
         }
         else
         {
@@ -223,22 +234,36 @@ public class QuadrantIME extends InputMethodService
 
 
 
+        Button myButton = (Button)quadView.findViewById(R.id.numbersButton);
+        myButton.setText("letters");
 
-//        detectorForNumbers = new GestureDetector(this, new GestureListener());
-//
-        //Creates the user interface held in the custom view QuadrantKeyboardView
-       // quadViewForNumbers = getLayoutInflater().inflate(R.layout.content_numbers, null);
-//
-//        //Attaches a listener to the custom view
-//        quadViewForNumbers.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                detectorForNumbers.onTouchEvent(event);
-//                return true;
-//            }
-//        });
-//
-//        return quadViewForNumbers;
+
+
+        TextView myText0 = (TextView)quadView.findViewById(R.id.topLeft);
+        myText0.setText("1   2\n\n3   .");
+        TextView myText1 = (TextView)quadView.findViewById(R.id.topRight);
+        myText1.setText("4   5\n\n6   ,");
+        TextView myText2 = (TextView)quadView.findViewById(R.id.botLeft);
+        myText2.setText("7   8\n\n!   ?");
+        TextView myText3 = (TextView)quadView.findViewById(R.id.botRight);
+        myText3.setText("9   0\n\n@   #");
+
+
+
+        if(onNumbersPage)
+        {
+            onNumbersPage = false;
+            onLettersPage = true;
+            myButton.setText("letters");
+        }
+        if(!onNumbersPage)
+        {
+            onNumbersPage = true;
+            onLettersPage = false;
+            myButton.setText("numbers");
+        }
+
+
     }
     public void onLettersClick(View view) {
         Log.d(TAG, "Clicking to go to Letters");
