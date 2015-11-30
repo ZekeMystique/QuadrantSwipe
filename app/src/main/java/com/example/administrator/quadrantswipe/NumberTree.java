@@ -14,7 +14,7 @@ public class NumberTree {
                 "1", "2", "3", ".",         // top left
                 "4", "5", "6", ",",         // top right
                 "7", "8", "!", "?",         // bottom left
-                "9", "0", "$", "#"});       // bottom right
+                "9", "0", "@", "#"});       // bottom right
 
     }
 

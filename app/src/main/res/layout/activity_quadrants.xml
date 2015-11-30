@@ -7,16 +7,17 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".Quadrants">
+    tools:context=".Quadrants"
+    android:background="#ffffff">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Z + C\n+ - +\nQ + B"
+        android:text="Z   C\n\nQ   B"
         android:lines = "3"
         android:typeface = "monospace"
-        android:background="@drawable/text_back"
+        android:background="#ffffff"
         android:id="@+id/topLeft"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -26,10 +27,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="D | U\n-   -\nH | L"
+        android:text="D   U\n\nH   L"
         android:lines = "3"
         android:typeface = "monospace"
-        android:background="@drawable/text_back"
+        android:background="#ffffff"
         android:id="@+id/topRight"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
@@ -39,10 +40,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="A | E\n-   -\nI | O"
+        android:text="A   E\n\nI   O"
         android:lines = "3"
         android:typeface = "monospace"
-        android:background="@drawable/text_back"
+        android:background="#ffffff"
         android:id="@+id/botLeft"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -52,10 +53,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="T | N\n-   -\nS | R"
+        android:text="T   N\n\nS   R"
         android:lines = "3"
         android:typeface = "monospace"
-        android:background="@drawable/text_back"
+        android:background="#ffffff"
         android:id="@+id/botRight"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -128,6 +129,70 @@
         android:paddingLeft="59dp"
         android:paddingRight="59dp"
         android:onClick="onNumbersClick"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Letters"
+        android:id="@+id/lettersButton"
+        android:layout_alignTop="@+id/topLeft"
+        android:onClick="onLettersClick"
+        android:layout_alignLeft="@+id/numbersButton"
+        android:layout_alignStart="@+id/numbersButton"
+        android:layout_alignRight="@+id/enter"
+        android:layout_alignEnd="@+id/enter" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView7"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/slim_arrow_up"
+        android:layout_alignBottom="@+id/topLeft"
+        android:layout_alignRight="@+id/topLeft"
+        android:layout_alignEnd="@+id/topLeft"
+        android:paddingTop="25dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView8"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/slim_arrow_up"
+        android:paddingTop="25dp"
+        android:layout_alignBottom="@+id/topRight"
+        android:layout_alignLeft="@+id/topRight"
+        android:layout_alignStart="@+id/topRight" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView9"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/slim_arrow_down"
+        android:layout_alignTop="@+id/botLeft"
+        android:layout_alignRight="@+id/botLeft"
+        android:layout_alignEnd="@+id/botLeft"
+        android:paddingBottom="25dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView10"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/slim_arrow_down"
+        android:paddingBottom="25dp"
+        android:layout_alignTop="@+id/botRight"
+        android:layout_alignLeft="@+id/botRight"
+        android:layout_alignStart="@+id/botRight" />
 
 
 </RelativeLayout>

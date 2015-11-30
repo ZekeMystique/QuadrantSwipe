@@ -128,6 +128,8 @@ public class NumbersActivity extends AppCompatActivity implements GestureDetecto
     public void onSwipeUpRight(){
         Log.d(TAG, "Swipe Up-Right");
         handleText(myNumTree.onTopRightSwipe());
+        TextView topLeft = (TextView)findViewById(R.id.topLeft);
+                        topLeft.setText("It Works");
     }
 
     public void onSwipeDownRight(){

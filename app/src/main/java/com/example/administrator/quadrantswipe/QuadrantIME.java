@@ -46,7 +46,14 @@ public class QuadrantIME extends InputMethodService
         detector = new GestureDetector(this, new GestureListener());
 
         //Creates the user interface held in the custom view QuadrantKeyboardView
-        quadView = getLayoutInflater().inflate(R.layout.activity_quadrants, null);
+        if(onLettersPage)
+        {
+            quadView = getLayoutInflater().inflate(R.layout.activity_quadrants, null);
+        }
+//        else
+//        {
+//            quadView = getLayoutInflater().inflate(R.layout.content_numbers, null);
+//        }
 
     // ** Justin Messing around **
 //        Button numbersButton = (Button)findViewById(R.id.numbersButton);
@@ -220,7 +227,7 @@ public class QuadrantIME extends InputMethodService
 //        detectorForNumbers = new GestureDetector(this, new GestureListener());
 //
         //Creates the user interface held in the custom view QuadrantKeyboardView
-//        quadViewForNumbers = getLayoutInflater().inflate(R.layout.activity_numbers, null);
+       // quadViewForNumbers = getLayoutInflater().inflate(R.layout.content_numbers, null);
 //
 //        //Attaches a listener to the custom view
 //        quadViewForNumbers.setOnTouchListener(new View.OnTouchListener() {
@@ -232,6 +239,13 @@ public class QuadrantIME extends InputMethodService
 //        });
 //
 //        return quadViewForNumbers;
+    }
+    public void onLettersClick(View view) {
+        Log.d(TAG, "Clicking to go to Letters");
+
+        onNumbersPage = false;
+        onLettersPage = true;
+
     }
 
     public void handleText(String inText) {
