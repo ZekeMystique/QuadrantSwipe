@@ -1,15 +1,11 @@
 package com.example.administrator.quadrantswipe;
 
-import android.app.Service;
-import android.content.Context;
 import android.inputmethodservice.InputMethodService;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.ExtractedText;
 import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
 import android.widget.Button;
@@ -204,7 +200,7 @@ public class QuadrantIME extends InputMethodService
     }
 
     private String padText(String inText) {
-        inText = "     \n- " + inText + " -\n     ";
+        inText = "" +inText+ " \n     ";
         return inText;
     }
 
@@ -235,31 +231,35 @@ public class QuadrantIME extends InputMethodService
 
 
         public void setSubMenu(){
-            String myString = myCharTree.pointer.topLeft.topLeft.data + " | "
-                    + myCharTree.pointer.topLeft.topRight.data + "\n" + "-   -" + "\n"
-                    + myCharTree.pointer.topLeft.bottomLeft.data + " | "
+//            String myString = myCharTree.pointer.topLeft.topLeft.data + " | "
+//                    + myCharTree.pointer.topLeft.topRight.data + "\n" + "-   -" + "\n"
+//                    + myCharTree.pointer.topLeft.bottomLeft.data + " | "
+//                    + myCharTree.pointer.topLeft.bottomRight.data;
+//            setTopLeft(myString);
+            String myString = myCharTree.pointer.topLeft.topLeft.data + "   "
+                    + myCharTree.pointer.topLeft.topRight.data + "\n" + "     " + "\n"
+                    + myCharTree.pointer.topLeft.bottomLeft.data + "   "
                     + myCharTree.pointer.topLeft.bottomRight.data;
             setTopLeft(myString);
-
-            myString = myCharTree.pointer.topRight.topLeft.data + " | "
-                    + myCharTree.pointer.topRight.topRight.data + "\n" + "-   -" + "\n"
-                    + myCharTree.pointer.topRight.bottomLeft.data + " | "
+            myString = myCharTree.pointer.topRight.topLeft.data + "   "
+                    + myCharTree.pointer.topRight.topRight.data + "\n" + "     " + "\n"
+                    + myCharTree.pointer.topRight.bottomLeft.data + "   "
                     + myCharTree.pointer.topRight.bottomRight.data;
             setTopRight(myString);
 
-            myString = myCharTree.pointer.bottomLeft.topLeft.data + " | "
-                    + myCharTree.pointer.bottomLeft.topRight.data + "\n" + "-   -" + "\n"
-                    + myCharTree.pointer.bottomLeft.bottomLeft.data + " | "
+            myString = myCharTree.pointer.bottomLeft.topLeft.data + "   "
+                    + myCharTree.pointer.bottomLeft.topRight.data + "\n" + "     " + "\n"
+                    + myCharTree.pointer.bottomLeft.bottomLeft.data + "   "
                     + myCharTree.pointer.bottomLeft.bottomRight.data;
             setBottomLeft(myString);
             if(myCharTree.pointer != myCharTree.root || usingNums){
-            myString = myCharTree.pointer.bottomRight.topLeft.data + " | "
-                    + myCharTree.pointer.bottomRight.topRight.data + "\n" + "-   -" + "\n"
-                    + myCharTree.pointer.bottomRight.bottomLeft.data + " | "
+            myString = myCharTree.pointer.bottomRight.topLeft.data + "   "
+                    + myCharTree.pointer.bottomRight.topRight.data + "\n" + "    " + "\n"
+                    + myCharTree.pointer.bottomRight.bottomLeft.data + "   "
                     + myCharTree.pointer.bottomRight.bottomRight.data;
             setBottomRight(myString);}
             else{
-                myString = getString(R.string.menu_br);
+                myString = "\n\nMore";      //getString(R.string.menu_br);
                 setBottomRight(myString);
             }
         }

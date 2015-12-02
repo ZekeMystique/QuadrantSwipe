@@ -4,123 +4,168 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Quadrants">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Quadrants"
+    android:background="#b1e0f9">
 
+    <!-- changed text values, removed @drawable/text_back from background-->
+    <!-- changed text value default:"Z + C\n+ - +\nQ + B"-->
+    <!-- changed text value default:"D | U\n-   -\nH | L"-->
+    <!-- changed text value default:"A | E\n-   -\nI | O"-->
+    <!-- changed text value default:"T | N\n-   -\nS | R"-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Z   C\n\nQ   B"
+            android:lines = "3"
+            android:typeface = "monospace"
+            android:background="#b1e0f9"
+            android:id="@+id/topLeft"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-    <TextView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="D   U\n\nH   L"
+            android:lines = "3"
+            android:typeface = "monospace"
+            android:background="#b1e0f9"
+            android:id="@+id/topRight"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="A   E\n\nI   O"
+            android:lines = "3"
+            android:typeface = "monospace"
+            android:background="#b1e0f9"
+            android:id="@+id/botLeft"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="T   N\n\nS   R"
+            android:lines = "3"
+            android:typeface = "monospace"
+            android:background="#b1e0f9"
+            android:id="@+id/botRight"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Sample Text goes here."
+            android:id="@+id/outputText"
+            android:textSize="30sp"
+            android:background="@drawable/text_back"
+            android:typeface = "monospace"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Spacebar"
+            android:id="@+id/space"
+            android:layout_alignBottom="@+id/botLeft"
+            android:layout_centerHorizontal="true"
+            android:onClick="onSpaceClick"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DEL"
+            android:id="@+id/del"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/space"
+            android:layout_toEndOf="@+id/space"
+            android:onClick="onDelClick"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" ^ "
+            android:id="@+id/shift"
+            android:layout_alignBottom="@+id/botLeft"
+            android:layout_toLeftOf="@+id/space"
+            android:layout_toStartOf="@+id/space"
+            android:onClick="onShiftClick"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RET"
+            android:id="@+id/enter"
+            android:onClick="onEnterClick"
+            android:layout_above="@+id/del"
+            android:layout_toRightOf="@+id/space"
+            android:layout_toEndOf="@+id/space" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123"
+            android:id="@+id/numToggle"
+            android:onClick="onNumClick"
+            android:layout_above="@+id/space"
+            android:layout_alignLeft="@+id/shift"
+            android:layout_alignStart="@+id/shift" />
+
+        <requestFocus/>
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Z + C\n+ - +\nQ + B"
-        android:lines = "3"
-        android:typeface = "monospace"
-        android:background="@drawable/text_back"
-        android:id="@+id/topLeft"
-        android:layout_alignParentTop="true"
+        android:id="@+id/topLeftArrow"
+        android:src="@drawable/arrow_up"
+        android:layout_alignBottom="@+id/topLeft"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="D | U\n-   -\nH | L"
-        android:lines = "3"
-        android:typeface = "monospace"
-        android:background="@drawable/text_back"
-        android:id="@+id/topRight"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:id="@+id/topRightArrow"
+        android:src="@drawable/arrow_up"
+        android:layout_alignTop="@+id/topLeftArrow"
+        android:layout_alignRight="@+id/topRight"
+        android:layout_alignEnd="@+id/topRight"
+        android:paddingRight="5dp" />
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="A | E\n-   -\nI | O"
-        android:lines = "3"
-        android:typeface = "monospace"
-        android:background="@drawable/text_back"
-        android:id="@+id/botLeft"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/bottomLeftArrow"
+        android:src="@drawable/arrow_down"
+        android:layout_alignTop="@+id/botLeft"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:paddingBottom="25dp" />
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="T | N\n-   -\nS | R"
-        android:lines = "3"
-        android:typeface = "monospace"
-        android:background="@drawable/text_back"
-        android:id="@+id/botRight"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Sample Text goes here."
-        android:id="@+id/outputText"
-        android:textSize="30sp"
-        android:background="@drawable/text_back"
-        android:typeface = "monospace"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Spacebar"
-        android:id="@+id/space"
-        android:layout_alignBottom="@+id/botLeft"
-        android:layout_centerHorizontal="true"
-        android:onClick="onSpaceClick"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DEL"
-        android:id="@+id/del"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/space"
-        android:layout_toEndOf="@+id/space"
-        android:onClick="onDelClick"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" ^ "
-        android:id="@+id/shift"
-        android:layout_alignBottom="@+id/botLeft"
-        android:layout_toLeftOf="@+id/space"
-        android:layout_toStartOf="@+id/space"
-        android:onClick="onShiftClick"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RET"
-        android:id="@+id/enter"
-        android:onClick="onEnterClick"
-        android:layout_above="@+id/del"
-        android:layout_toRightOf="@+id/space"
-        android:layout_toEndOf="@+id/space" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="123"
-        android:id="@+id/numToggle"
-        android:onClick="onNumClick"
-        android:layout_above="@+id/space"
-        android:layout_alignLeft="@+id/shift"
-        android:layout_alignStart="@+id/shift" />
-
-    <requestFocus/>
+        android:id="@+id/bottomRightArrow"
+        android:src="@drawable/arrow_down"
+        android:layout_alignTop="@+id/botRight"
+        android:layout_alignRight="@+id/botRight"
+        android:layout_alignEnd="@+id/botRight"
+        android:paddingRight="5dp"
+        android:paddingBottom="25dp" />
 
 
 </RelativeLayout>
