@@ -170,9 +170,11 @@ public class QuadrantIME extends InputMethodService
             myCharTree.pointer = myCharTree.root;
             adjustView();
         }
+        else{
         Log.d(TAG, "Trying to Delete");
         InputConnection ic = getCurrentInputConnection();
         ic.deleteSurroundingText(1, 0);
+        }
         updatePreview();
     }
 
