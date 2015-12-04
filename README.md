@@ -10,7 +10,6 @@ To do:
   - particularly when you close the keyboard for one app and it keeps the data for the other app
 - Vibrate/flash feedback on swipe
 - UI revamp. Buttons look kinda ugh
-- 
 
 Possibly:
 - Moving cursor around
