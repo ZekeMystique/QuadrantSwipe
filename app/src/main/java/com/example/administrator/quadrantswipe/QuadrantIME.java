@@ -10,32 +10,26 @@ import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
 import android.widget.Button;
 import android.widget.TextView;
+import java.lang.Math;
 
 /**
  * Created by Rohan Dawson on 17/11/2015.
  */
 public class QuadrantIME extends InputMethodService
-       // implements GestureDetector.OnGestureListener
 {
-
 
     GestureDetector detector;
     public CharacterTree charMap;
     public CharacterTree numMap;
     public CharacterTree myCharTree;
     public boolean usingNums;
-    //public LayoutManager myLayman;
-
-
-    //A custom view is needed so that we can attach an onTouchListener
+    private static final String TAG = "Swipetesting";
+    private static final int SWIPE_MIN_DISTANCE = 25;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 20;
+    private static boolean caps;
+    int previewStringLength = 0;
+    //Our keyboard's View
     View quadView;
-
-
-
-    /*
-    * Text input requires a service, not an activity.
-    * This is now our core file
-    * */
 
     //Method gets called when the service starts. A View is 'inflated' for the user interface
     @Override
@@ -44,11 +38,13 @@ public class QuadrantIME extends InputMethodService
         numMap = new CharacterTree(false);
         myCharTree = charMap;
         usingNums = false;
+        caps = true;
         detector = new GestureDetector(this, new GestureListener());
 
         //Creates the user interface held in the custom view QuadrantKeyboardView
         quadView = getLayoutInflater().inflate(R.layout.activity_quadrants, null);
-       adjustView();
+        adjustView();
+
 
         //Attaches a listener to the custom view
         quadView.setOnTouchListener(new View.OnTouchListener() {
@@ -58,7 +54,7 @@ public class QuadrantIME extends InputMethodService
                 return true;
             }
         });
-
+        updatePreview();
         return quadView;
     }
 
@@ -104,10 +100,7 @@ public class QuadrantIME extends InputMethodService
     }
 
 
-    private static final String TAG = "Swipetesting";
-    private static final int SWIPE_MIN_DISTANCE = 25;
-    private static final int SWIPE_THRESHOLD_VELOCITY = 20;
-    private static boolean caps = false;
+
 
 
     public boolean checkSwipe(float diffX, float diffY, float velocityX, float velocityY) {
@@ -115,6 +108,10 @@ public class QuadrantIME extends InputMethodService
                 && (Math.abs(diffY) > SWIPE_MIN_DISTANCE) && (Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY);
     }
 
+    public void onSwipeUpLeft() {
+        Log.d(TAG, "Swipe Up-Left");
+        handleText(myCharTree.onTopLeftSwipe());
+    }
     public void onSwipeUpRight() {
         Log.d(TAG, "Swipe Up-Right");
         handleText(myCharTree.onTopRightSwipe());
@@ -130,10 +127,7 @@ public class QuadrantIME extends InputMethodService
         handleText(myCharTree.onBottomLeftSwipe());
     }
 
-    public void onSwipeUpLeft() {
-        Log.d(TAG, "Swipe Up-Left");
-        handleText(myCharTree.onTopLeftSwipe());
-    }
+
 
     public void onShiftClick(View view) {
         if (!caps) {
@@ -143,6 +137,7 @@ public class QuadrantIME extends InputMethodService
         }
         adjustView();
     }
+
     public void onNumClick(View view) {
         myCharTree.pointer = myCharTree.root;
         Button myButton = (Button)quadView.findViewById(R.id.numToggle);
@@ -162,25 +157,43 @@ public class QuadrantIME extends InputMethodService
     }
 
     public void onSpaceClick(View view) {
-        handleText(" ");
+        InputConnection ic = getCurrentInputConnection();
+        ExtractedTextRequest myReq = new ExtractedTextRequest();
+        CharSequence charSequence =  ic.getExtractedText(myReq, 0).text;
+        if (charSequence.length() > 0){
+            if(charSequence.charAt(Math.max(charSequence.length() - 1, 0)) == ' '){
+                ic.deleteSurroundingText(1, 0);
+                handleText(". ");
+                caps = true;
+            }
+            else handleText(" ");
+        }
+        else
+        {
+            handleText(" ");
+        }
     }
 
     public void onDelClick(View view) {
         if(myCharTree.pointer != myCharTree.root) {
             myCharTree.pointer = myCharTree.root;
-            adjustView();
+
         }
         else{
-        Log.d(TAG, "Trying to Delete");
-        InputConnection ic = getCurrentInputConnection();
-        ic.deleteSurroundingText(1, 0);
+            Log.d(TAG, "Trying to Delete");
+            InputConnection ic = getCurrentInputConnection();
+            ic.deleteSurroundingText(1, 0);
+            previewStringLength--;
+            if (previewStringLength <= 0){
+                caps = true;
+                previewStringLength = 0;
+            }
         }
+        adjustView();
         updatePreview();
     }
 
     public void onEnterClick(View view) {
-
-
         InputConnection ic = getCurrentInputConnection();
         KeyEvent myKey = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER);
         ic.sendKeyEvent(myKey);
@@ -189,12 +202,13 @@ public class QuadrantIME extends InputMethodService
 
     public void handleText(String inText) {
         InputConnection ic = getCurrentInputConnection();
-        if (caps) {
-            inText = inText.toUpperCase();
-        }
 
         if (inText != null) {
+            if (caps) {
+                inText = inText.toUpperCase();
+            }
             ic.commitText(inText, 1);
+            previewStringLength++;
             caps = false;
         }
         updatePreview();
@@ -209,112 +223,99 @@ public class QuadrantIME extends InputMethodService
     public void updatePreview(){
         InputConnection ic = getCurrentInputConnection();
         ExtractedTextRequest myReq = new ExtractedTextRequest();
-        //ic.getExtractedText(myReq, 0);
         TextView outputText = (TextView) quadView.findViewById(R.id.outputText);
         outputText.setText(ic.getExtractedText(myReq, 0).text);
     }
 
-        public void adjustView()
-        {
-            if(!myCharTree.pointer.bottomRight.leaf){
-                setSubMenu();
-            }
-            else if(myCharTree.getLeaf() == false) {
-                    String myString = myCharTree.pointer.topRight.data;
-                    setTopRight(padText(myString));
-                    myString = myCharTree.pointer.bottomRight.data;
-                    setBottomRight(padText(myString));
-                    myString = myCharTree.pointer.bottomLeft.data;
-                    setBottomLeft(padText(myString));
-                    myString = myCharTree.pointer.topLeft.data;
-                    setTopLeft(padText(myString));
-                }
-            }
+    public void adjustView()
+    {
 
-
-        public void setSubMenu(){
-//            String myString = myCharTree.pointer.topLeft.topLeft.data + " | "
-//                    + myCharTree.pointer.topLeft.topRight.data + "\n" + "-   -" + "\n"
-//                    + myCharTree.pointer.topLeft.bottomLeft.data + " | "
-//                    + myCharTree.pointer.topLeft.bottomRight.data;
-//            setTopLeft(myString);
-            String myString = myCharTree.pointer.topLeft.topLeft.data + "   "
-                    + myCharTree.pointer.topLeft.topRight.data + "\n" + "     " + "\n"
-                    + myCharTree.pointer.topLeft.bottomLeft.data + "   "
-                    + myCharTree.pointer.topLeft.bottomRight.data;
-            setTopLeft(myString);
-            myString = myCharTree.pointer.topRight.topLeft.data + "   "
-                    + myCharTree.pointer.topRight.topRight.data + "\n" + "     " + "\n"
-                    + myCharTree.pointer.topRight.bottomLeft.data + "   "
-                    + myCharTree.pointer.topRight.bottomRight.data;
-            setTopRight(myString);
-
-            myString = myCharTree.pointer.bottomLeft.topLeft.data + "   "
-                    + myCharTree.pointer.bottomLeft.topRight.data + "\n" + "     " + "\n"
-                    + myCharTree.pointer.bottomLeft.bottomLeft.data + "   "
-                    + myCharTree.pointer.bottomLeft.bottomRight.data;
-            setBottomLeft(myString);
-            if(myCharTree.pointer != myCharTree.root || usingNums){
-            myString = myCharTree.pointer.bottomRight.topLeft.data + "   "
-                    + myCharTree.pointer.bottomRight.topRight.data + "\n" + "    " + "\n"
-                    + myCharTree.pointer.bottomRight.bottomLeft.data + "   "
-                    + myCharTree.pointer.bottomRight.bottomRight.data;
-            setBottomRight(myString);}
-            else{
-                myString = "\n\nMore";      //getString(R.string.menu_br);
-                setBottomRight(myString);
-            }
+        if(myCharTree.pointer == myCharTree.root || myCharTree.pointer == myCharTree.root.bottomRight){
+            setSubMenu();
         }
 
-//        public void setRootMenu()
-//        {
-//            String myString = getString(R.string.menu_tr);
-//            setTopRight(myString);
-//            myString = getString(R.string.menu_br);
-//            setBottomRight(myString);
-//            myString = getString(R.string.menu_bl);
-//            setBottomLeft(myString);
-//            myString = getString(R.string.menu_tl);
-//            setTopLeft(myString);
-//        }
+        else if(!myCharTree.pointer.leaf) {
+            String myString = myCharTree.pointer.topRight.data;
+            setTopRight(padText(myString));
+            myString = myCharTree.pointer.bottomRight.data;
+            setBottomRight(padText(myString));
+            myString = myCharTree.pointer.bottomLeft.data;
+            setBottomLeft(padText(myString));
+            myString = myCharTree.pointer.topLeft.data;
+            setTopLeft(padText(myString));
+        }
+    }
 
-        public void setTopLeft(String s){
-            TextView newView = (TextView) quadView.findViewById(R.id.topLeft);
-            if(caps){
-                newView.setText(s.toUpperCase());
-            }
-            else{
-                newView.setText(s);
-            }
-        }
-        public void setTopRight(String s){
-            TextView newView = (TextView) quadView.findViewById(R.id.topRight);
-            if(caps){
-                newView.setText(s.toUpperCase());
-            }
-            else{
-                newView.setText(s);
-            }
 
+    public void setSubMenu(){
+        String myString = myCharTree.pointer.topLeft.topLeft.data + "   "
+                + myCharTree.pointer.topLeft.topRight.data + "\n" + "     " + "\n"
+                + myCharTree.pointer.topLeft.bottomLeft.data + "   "
+                + myCharTree.pointer.topLeft.bottomRight.data;
+        setTopLeft(myString);
+        myString = myCharTree.pointer.topRight.topLeft.data + "   "
+                + myCharTree.pointer.topRight.topRight.data + "\n" + "     " + "\n"
+                + myCharTree.pointer.topRight.bottomLeft.data + "   "
+                + myCharTree.pointer.topRight.bottomRight.data;
+        setTopRight(myString);
+
+        myString = myCharTree.pointer.bottomLeft.topLeft.data + "   "
+                + myCharTree.pointer.bottomLeft.topRight.data + "\n" + "     " + "\n"
+                + myCharTree.pointer.bottomLeft.bottomLeft.data + "   "
+                + myCharTree.pointer.bottomLeft.bottomRight.data;
+        setBottomLeft(myString);
+        if(myCharTree.pointer != myCharTree.root || usingNums){
+        myString = myCharTree.pointer.bottomRight.topLeft.data + "   "
+                + myCharTree.pointer.bottomRight.topRight.data + "\n" + "    " + "\n"
+                + myCharTree.pointer.bottomRight.bottomLeft.data + "   "
+                + myCharTree.pointer.bottomRight.bottomRight.data;
+        setBottomRight(myString);}
+        else{
+            myString = "\n\nMore";      //getString(R.string.menu_br);
+            setBottomRight(myString);
         }
-        public void setBottomLeft(String s){
-            TextView newView = (TextView) quadView.findViewById(R.id.botLeft);
-            if(caps){
-                newView.setText(s.toUpperCase());
-            }
-            else{
-                newView.setText(s);
-            }
+    }
+
+
+    public void setTopLeft(String s){
+        TextView newView = (TextView) quadView.findViewById(R.id.topLeft);
+        if(caps){
+            newView.setText(s.toUpperCase());
+            Log.d(TAG, "Redrawing top left corner");
         }
-        public void setBottomRight(String s){
-            TextView newView = (TextView) quadView.findViewById(R.id.botRight);
-            if(caps){
-                newView.setText(s.toUpperCase());
-            }
-            else{
-                newView.setText(s);
-            }
+        else{
+            newView.setText(s);
         }
+    }
+
+    public void setTopRight(String s){
+        TextView newView = (TextView) quadView.findViewById(R.id.topRight);
+        if(caps){
+            newView.setText(s.toUpperCase());
+        }
+        else{
+            newView.setText(s);
+        }
+
+    }
+    public void setBottomLeft(String s){
+        TextView newView = (TextView) quadView.findViewById(R.id.botLeft);
+        if(caps){
+            newView.setText(s.toUpperCase());
+        }
+        else{
+            newView.setText(s);
+        }
+    }
+    public void setBottomRight(String s){
+        TextView newView = (TextView) quadView.findViewById(R.id.botRight);
+        if(caps){
+            newView.setText(s.toUpperCase());
+        }
+        else{
+            newView.setText(s);
+        }
+    }
     }
 
 
