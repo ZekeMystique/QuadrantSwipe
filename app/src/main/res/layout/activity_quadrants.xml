@@ -47,7 +47,7 @@
             android:typeface = "monospace"
             android:background="#b1e0f9"
             android:id="@+id/botLeft"
-            android:layout_above="@+id/enter"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -82,7 +82,7 @@
             android:text="Spacebar"
             android:id="@+id/space"
             android:onClick="onSpaceClick"
-            android:layout_alignParentBottom="true"
+            android:layout_above="@+id/bottomRightArrow"
             android:layout_centerHorizontal="true" />
 
         <Button
@@ -90,10 +90,10 @@
             android:layout_height="wrap_content"
             android:text="DEL"
             android:id="@+id/del"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/space"
-            android:layout_toEndOf="@+id/space"
-            android:onClick="onDelClick"/>
+            android:onClick="onDelClick"
+            android:layout_above="@+id/space"
+            android:layout_alignRight="@+id/topRight"
+            android:layout_alignEnd="@+id/topRight" />
 
         <Button
             android:layout_width="wrap_content"
@@ -101,9 +101,9 @@
             android:text=" ^ "
             android:id="@+id/shift"
             android:onClick="onShiftClick"
-            android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@+id/space"
-            android:layout_toStartOf="@+id/space" />
+            android:layout_alignTop="@+id/enter"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <Button
             android:layout_width="wrap_content"
@@ -112,8 +112,8 @@
             android:id="@+id/enter"
             android:onClick="onEnterClick"
             android:layout_above="@+id/del"
-            android:layout_toRightOf="@+id/space"
-            android:layout_toEndOf="@+id/space" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <Button
             android:layout_width="wrap_content"
@@ -122,8 +122,8 @@
             android:id="@+id/numToggle"
             android:onClick="onNumClick"
             android:layout_above="@+id/space"
-            android:layout_alignLeft="@+id/shift"
-            android:layout_alignStart="@+id/shift" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <requestFocus/>
 
@@ -152,7 +152,7 @@
         android:id="@+id/bottomLeftArrow"
         android:src="@drawable/arrow_down"
         android:paddingBottom="25dp"
-        android:layout_above="@+id/numToggle"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -163,7 +163,7 @@
         android:src="@drawable/arrow_down"
         android:paddingRight="5dp"
         android:paddingBottom="25dp"
-        android:layout_above="@+id/enter"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
