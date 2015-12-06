@@ -7,6 +7,7 @@ import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
 import android.widget.Button;
@@ -55,8 +56,13 @@ public class QuadrantIME extends InputMethodService
                 return true;
             }
         });
-        updatePreview();
+        //updatePreview();
         return quadView;
+    }
+
+    @Override
+    public void onStartInputView(EditorInfo attribute, boolean restarting) {
+
     }
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
