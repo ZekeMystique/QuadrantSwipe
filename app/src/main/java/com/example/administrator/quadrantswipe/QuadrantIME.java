@@ -185,6 +185,8 @@ public class QuadrantIME extends InputMethodService
                 ic.deleteSurroundingText(1, 0);
                 handleText(". ");
                 caps = true;
+                Button myButton = (Button)quadView.findViewById(R.id.shift);
+                myButton.setAlpha(.3f);
             }
             else handleText(" ");
         }
