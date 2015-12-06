@@ -7,54 +7,105 @@
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Quadrants"
     android:background="#b1e0f9">
 
-
-    <TextView
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Z   C\n\nQ   B"
-        android:lines = "3"
-        android:typeface = "monospace"
-        android:id="@+id/topLeft"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop='true'
+        android:layout_alignParentLeft='true'
+        android:id="@+id/frameLayouttl">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Z   C\n\nQ   B"
+            android:lines = "3"
+            android:typeface = "monospace"
+            android:id="@+id/topLeft"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/topLeftArrow"
+            android:src="@drawable/diag_arrow_tl_black"
+            android:layout_gravity="center"
+            />
+    </FrameLayout>
 
-    <TextView
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="D   U\n\nH   L"
-        android:lines = "3"
-        android:typeface = "monospace"
-        android:id="@+id/topRight"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentTop='true'
+        android:layout_alignParentRight='true'
+        android:id="@+id/frameLayouttr">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="D   U\n\nH   L"
+            android:lines = "3"
+            android:typeface = "monospace"
+            android:layout_gravity="center"
+            android:id="@+id/topRight"
+            />
 
-    <TextView
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/topRightArrow"
+            android:src="@drawable/diag_arrow_tr_black"
+            android:layout_gravity="center"
+            />
+
+    </FrameLayout>
+
+
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="A   E\n\nI   O"
-        android:lines = "3"
-        android:typeface = "monospace"
-        android:id="@+id/botLeft"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentBottom='true'
+        android:layout_alignParentLeft='true'
+        android:id="@+id/frameLayoutbl">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="A   E\n\nI   O"
+            android:lines = "3"
+            android:typeface = "monospace"
+            android:id="@+id/botLeft"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottomLeftArrow"
+            android:src="@drawable/diag_arrow_bl_black"
+            android:layout_gravity="center"
+            />
+    </FrameLayout>
 
-    <TextView
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="T   N\n\nS   R"
-        android:lines = "3"
-        android:typeface = "monospace"
-        android:id="@+id/botRight"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentBottom='true'
+        android:layout_alignParentRight='true'
+        android:id="@+id/frameLayoutbr">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="T   N\n\nS   R"
+            android:lines = "3"
+            android:typeface = "monospace"
+            android:id="@+id/botRight"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottomRightArrow"
+            android:src="@drawable/diag_arrow_br_black"
+            android:layout_gravity="center"
+            />
+    </FrameLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -73,9 +124,9 @@
         android:layout_height="wrap_content"
         android:text="Spacebar"
         android:id="@+id/space"
-        android:layout_alignBottom="@+id/botLeft"
-        android:layout_centerHorizontal="true"
-        android:onClick="onSpaceClick"/>
+        android:onClick="onSpaceClick"
+        android:layout_below="@+id/enter"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -92,10 +143,10 @@
         android:layout_height="wrap_content"
         android:text=" ^ "
         android:id="@+id/shift"
-        android:layout_alignBottom="@+id/botLeft"
+        android:onClick="onShiftClick"
+        android:layout_below="@+id/numToggle"
         android:layout_toLeftOf="@+id/space"
-        android:layout_toStartOf="@+id/space"
-        android:onClick="onShiftClick"/>
+        android:layout_toStartOf="@+id/space" />
 
     <Button
         android:layout_width="wrap_content"
@@ -118,53 +169,5 @@
         android:layout_alignStart="@+id/shift" />
 
     <requestFocus/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/topLeftArrow"
-        android:src="@drawable/arrow_up"
-        android:layout_alignBottom="@+id/topLeft"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/topRightArrow"
-        android:src="@drawable/arrow_up"
-        android:layout_alignTop="@+id/topLeftArrow"
-        android:layout_alignRight="@+id/topRight"
-        android:layout_alignEnd="@+id/topRight"
-        android:paddingRight="5dp" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/bottomLeftArrow"
-        android:src="@drawable/arrow_down"
-        android:layout_alignTop="@+id/botLeft"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:paddingBottom="25dp" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/bottomRightArrow"
-        android:src="@drawable/arrow_down"
-        android:layout_alignTop="@+id/botRight"
-        android:layout_alignRight="@+id/botRight"
-        android:layout_alignEnd="@+id/botRight"
-        android:paddingRight="5dp"
-        android:paddingBottom="25dp" />
-
-    <Space
-        android:layout_width="20px"
-        android:layout_height="20px"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.example.administrator.quadrantswipe;
 
 import android.inputmethodservice.InputMethodService;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
@@ -41,8 +42,8 @@ public class QuadrantIME extends InputMethodService
         caps = true;
         detector = new GestureDetector(this, new GestureListener());
 
-        //Creates the user interface held in the custom view QuadrantKeyboardView
         quadView = getLayoutInflater().inflate(R.layout.activity_quadrants, null);
+        //quadView.setBackgroundColor(0xCCb1e0f9);
         adjustView();
 
 
@@ -69,24 +70,28 @@ public class QuadrantIME extends InputMethodService
                 if (diffX < 0 && diffY < 0) {
                     if (checkSwipe(diffX, diffY, velocityX, velocityY)) {
                         onSwipeUpLeft();
+                        buzzMe();
                         return true;
                     }
                 }
                 if (diffX < 0 && diffY > 0) {
                     if (checkSwipe(diffX, diffY, velocityX, velocityY)) {
                         onSwipeDownLeft();
+                        buzzMe();
                         return true;
                     }
                 }
                 if (diffX > 0 && diffY > 0) {
                     if (checkSwipe(diffX, diffY, velocityX, velocityY)) {
                         onSwipeDownRight();
+                        buzzMe();
                         return true;
                     }
                 }
                 if (diffX > 0 && diffY < 0) {
                     if (checkSwipe(diffX, diffY, velocityX, velocityY)) {
                         onSwipeUpRight();
+                        buzzMe();
                         return true;
                     }
                 }
@@ -106,6 +111,11 @@ public class QuadrantIME extends InputMethodService
     public boolean checkSwipe(float diffX, float diffY, float velocityX, float velocityY) {
         return (Math.abs(diffX) > SWIPE_MIN_DISTANCE) && (Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY)
                 && (Math.abs(diffY) > SWIPE_MIN_DISTANCE) && (Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY);
+    }
+
+    private void buzzMe(){
+        Vibrator myBuzz = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
+        myBuzz.vibrate(20);
     }
 
     public void onSwipeUpLeft() {
@@ -130,11 +140,15 @@ public class QuadrantIME extends InputMethodService
 
 
     public void onShiftClick(View view) {
+        Button myButton = (Button)quadView.findViewById(R.id.shift);
         if (!caps) {
             caps = true;
+            myButton.setAlpha(.3f);
         } else {
             caps = false;
+            myButton.setAlpha(1f);
         }
+        buzzMe();
         adjustView();
     }
 
@@ -152,7 +166,7 @@ public class QuadrantIME extends InputMethodService
             usingNums = true;
             myButton.setText("ABC");
         }
-
+        buzzMe();
         adjustView();
     }
 
@@ -172,6 +186,7 @@ public class QuadrantIME extends InputMethodService
         {
             handleText(" ");
         }
+        buzzMe();
     }
 
     public void onDelClick(View view) {
@@ -189,6 +204,7 @@ public class QuadrantIME extends InputMethodService
                 previewStringLength = 0;
             }
         }
+        buzzMe();
         adjustView();
         updatePreview();
     }
@@ -197,6 +213,7 @@ public class QuadrantIME extends InputMethodService
         InputConnection ic = getCurrentInputConnection();
         KeyEvent myKey = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER);
         ic.sendKeyEvent(myKey);
+        buzzMe();
     }
 
 
@@ -215,8 +232,20 @@ public class QuadrantIME extends InputMethodService
         adjustView();
     }
 
-    private String padText(String inText) {
-        inText = "" +inText+ " \n     ";
+    private String padTextTL(String inText) {
+        inText = inText+ "    \n     \n     ";
+        return inText;
+    }
+    private String padTextTR(String inText) {
+        inText = "    " +inText+ "\n     \n     ";
+        return inText;
+    }
+    private String padTextBL(String inText) {
+        inText = "     \n     \n" +inText+"    ";
+        return inText;
+    }
+    private String padTextBR(String inText) {
+        inText = "     \n     \n    " + inText;
         return inText;
     }
 
@@ -236,13 +265,13 @@ public class QuadrantIME extends InputMethodService
 
         else if(!myCharTree.pointer.leaf) {
             String myString = myCharTree.pointer.topRight.data;
-            setTopRight(padText(myString));
+            setTopRight(padTextTR(myString));
             myString = myCharTree.pointer.bottomRight.data;
-            setBottomRight(padText(myString));
+            setBottomRight(padTextBR(myString));
             myString = myCharTree.pointer.bottomLeft.data;
-            setBottomLeft(padText(myString));
+            setBottomLeft(padTextBL(myString));
             myString = myCharTree.pointer.topLeft.data;
-            setTopLeft(padText(myString));
+            setTopLeft(padTextTL(myString));
         }
     }
 
@@ -271,7 +300,7 @@ public class QuadrantIME extends InputMethodService
                 + myCharTree.pointer.bottomRight.bottomRight.data;
         setBottomRight(myString);}
         else{
-            myString = "\n\nMore";      //getString(R.string.menu_br);
+            myString = "     \n     \n More";      //getString(R.string.menu_br);
             setBottomRight(myString);
         }
     }
@@ -281,7 +310,7 @@ public class QuadrantIME extends InputMethodService
         TextView newView = (TextView) quadView.findViewById(R.id.topLeft);
         if(caps){
             newView.setText(s.toUpperCase());
-            Log.d(TAG, "Redrawing top left corner");
+            //Log.d(TAG, "Redrawing top left corner");
         }
         else{
             newView.setText(s);

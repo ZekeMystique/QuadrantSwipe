@@ -12,32 +12,65 @@
     <!-- changed text value default:"D | U\n-   -\nH | L"-->
     <!-- changed text value default:"A | E\n-   -\nI | O"-->
     <!-- changed text value default:"T | N\n-   -\nS | R"-->
-        <TextView
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop='true'
+        android:layout_alignParentLeft='true'
+        android:id="@+id/frameLayouttl">
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Z   C\n\nQ   B"
             android:lines = "3"
             android:typeface = "monospace"
-            android:background="#b1e0f9"
             android:id="@+id/topLeft"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+             />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/topLeftArrow"
+        android:src="@drawable/diag_arrow_tl_black"
+        android:layout_gravity="center"
+        />
+    </FrameLayout>
 
-        <TextView
+    <FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop='true'
+    android:layout_alignParentRight='true'
+    android:id="@+id/frameLayouttr">
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="D   U\n\nH   L"
             android:lines = "3"
             android:typeface = "monospace"
-            android:background="#b1e0f9"
+            android:layout_gravity="center"
             android:id="@+id/topRight"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+             />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/topRightArrow"
+        android:src="@drawable/diag_arrow_tr_black"
+        android:layout_gravity="center"
+        />
+
+</FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom='true'
+        android:layout_alignParentLeft='true'
+        android:id="@+id/frameLayoutbl">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,12 +78,23 @@
             android:text="A   E\n\nI   O"
             android:lines = "3"
             android:typeface = "monospace"
-            android:background="#b1e0f9"
             android:id="@+id/botLeft"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomLeftArrow"
+        android:src="@drawable/diag_arrow_bl_black"
+        android:layout_gravity="center"
+        />
+    </FrameLayout>
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom='true'
+        android:layout_alignParentRight='true'
+        android:id="@+id/frameLayoutbr">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,11 +102,16 @@
             android:text="T   N\n\nS   R"
             android:lines = "3"
             android:typeface = "monospace"
-            android:background="#b1e0f9"
             android:id="@+id/botRight"
-            android:layout_alignBottom="@+id/bottomRightArrow"
-            android:layout_alignLeft="@+id/topRightArrow"
-            android:layout_alignStart="@+id/topRightArrow" />
+            />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomRightArrow"
+        android:src="@drawable/diag_arrow_br_black"
+        android:layout_gravity="center"
+        />
+</FrameLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -82,7 +131,7 @@
             android:text="Spacebar"
             android:id="@+id/space"
             android:onClick="onSpaceClick"
-            android:layout_above="@+id/bottomRightArrow"
+            android:layout_alignTop="@+id/frameLayoutbr"
             android:layout_centerHorizontal="true" />
 
         <Button
@@ -92,8 +141,8 @@
             android:id="@+id/del"
             android:onClick="onDelClick"
             android:layout_above="@+id/space"
-            android:layout_alignRight="@+id/topRight"
-            android:layout_alignEnd="@+id/topRight" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <Button
             android:layout_width="wrap_content"
@@ -121,51 +170,10 @@
             android:text="123"
             android:id="@+id/numToggle"
             android:onClick="onNumClick"
-            android:layout_above="@+id/space"
+            android:layout_below="@+id/shift"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <requestFocus/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/topLeftArrow"
-        android:src="@drawable/arrow_up"
-        android:layout_alignBottom="@+id/topLeft"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/topRightArrow"
-        android:src="@drawable/arrow_up"
-        android:layout_alignTop="@+id/topLeftArrow"
-        android:layout_alignRight="@+id/topRight"
-        android:layout_alignEnd="@+id/topRight"
-        android:paddingRight="5dp" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/bottomLeftArrow"
-        android:src="@drawable/arrow_down"
-        android:paddingBottom="25dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/bottomRightArrow"
-        android:src="@drawable/arrow_down"
-        android:paddingRight="5dp"
-        android:paddingBottom="25dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
+    <requestFocus/>
 
 </RelativeLayout>
