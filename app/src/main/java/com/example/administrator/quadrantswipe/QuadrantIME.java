@@ -46,6 +46,8 @@ public class QuadrantIME extends InputMethodService
         quadView = getLayoutInflater().inflate(R.layout.activity_quadrants, null);
         //quadView.setBackgroundColor(0xCCb1e0f9);
         adjustView();
+        Button myButton = (Button)quadView.findViewById(R.id.shift);
+        myButton.setAlpha(.3f);
 
 
         //Attaches a listener to the custom view
@@ -185,6 +187,7 @@ public class QuadrantIME extends InputMethodService
                 ic.deleteSurroundingText(1, 0);
                 handleText(". ");
                 caps = true;
+                adjustView();
                 Button myButton = (Button)quadView.findViewById(R.id.shift);
                 myButton.setAlpha(.3f);
             }
@@ -209,6 +212,8 @@ public class QuadrantIME extends InputMethodService
             previewStringLength--;
             if (previewStringLength <= 0){
                 caps = true;
+                Button myButton = (Button)quadView.findViewById(R.id.shift);
+                myButton.setAlpha(.3f);
                 previewStringLength = 0;
             }
         }
@@ -235,6 +240,8 @@ public class QuadrantIME extends InputMethodService
             ic.commitText(inText, 1);
             previewStringLength++;
             caps = false;
+            Button myButton = (Button)quadView.findViewById(R.id.shift);
+            myButton.setAlpha(1f);
         }
         updatePreview();
         adjustView();
