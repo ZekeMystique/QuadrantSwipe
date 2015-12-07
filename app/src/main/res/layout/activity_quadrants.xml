@@ -5,7 +5,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Quadrants"
-    android:background="#b1e0f9">
+    android:background="#B3E5FC">
+    <!--android:background="#b1e0f9">-->
 
     <!-- changed text values, removed @drawable/text_back from background-->
     <!-- changed text value default:"Z + C\n+ - +\nQ + B"-->
@@ -117,7 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Enter Text"
+            android:text=""
             android:id="@+id/outputText"
             android:textSize="30sp"
             android:background="@drawable/text_back"
@@ -131,7 +132,7 @@
             android:text="Spacebar"
             android:id="@+id/space"
             android:onClick="onSpaceClick"
-            android:layout_below="@+id/numToggle"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 
         <Button
@@ -140,9 +141,9 @@
             android:text="DEL"
             android:id="@+id/del"
             android:onClick="onDelClick"
-            android:layout_below="@+id/enter"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_above="@+id/frameLayoutbr"
+            android:layout_alignRight="@+id/frameLayoutbr"
+            android:layout_alignEnd="@+id/frameLayoutbr" />
 
         <Button
             android:layout_width="wrap_content"
@@ -150,7 +151,7 @@
             android:text=" ^ "
             android:id="@+id/shift"
             android:onClick="onShiftClick"
-            android:layout_below="@+id/outputText"
+            android:layout_above="@+id/numToggle"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -160,9 +161,9 @@
             android:text="RET"
             android:id="@+id/enter"
             android:onClick="onEnterClick"
-            android:layout_below="@+id/outputText"
-            android:layout_alignLeft="@+id/del"
-            android:layout_alignStart="@+id/del" />
+            android:layout_above="@+id/del"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <Button
             android:layout_width="wrap_content"
@@ -170,10 +171,10 @@
             android:text="123"
             android:id="@+id/numToggle"
             android:onClick="onNumClick"
-            android:layout_below="@+id/shift"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_above="@+id/frameLayoutbl"
+            android:layout_alignLeft="@+id/frameLayoutbl"
+            android:layout_alignStart="@+id/frameLayoutbl" />
+
 
     <requestFocus/>
-
 </RelativeLayout>

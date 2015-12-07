@@ -62,10 +62,11 @@ public class QuadrantIME extends InputMethodService
         return quadView;
     }
 
-    @Override
-    public void onStartInputView(EditorInfo attribute, boolean restarting) {
-
-    }
+    /*@Override
+    *//*public void onStartInputView(EditorInfo attribute, boolean restarting) {
+        super.onStartInputView(attribute, restarting);
+        updatePreview();
+    }*/
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
@@ -224,8 +225,9 @@ public class QuadrantIME extends InputMethodService
 
     public void onEnterClick(View view) {
         InputConnection ic = getCurrentInputConnection();
-        KeyEvent myKey = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER);
-        ic.sendKeyEvent(myKey);
+        /*KeyEvent myKey = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER);
+        ic.sendKeyEvent(myKey);*/
+        ic.performEditorAction(EditorInfo.IME_ACTION_DONE);
         buzzMe();
     }
 
