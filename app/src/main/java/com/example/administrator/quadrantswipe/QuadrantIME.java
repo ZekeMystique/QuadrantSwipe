@@ -33,6 +33,7 @@ public class QuadrantIME extends InputMethodService
     //Our keyboard's View
     View quadView;
 
+
     //Method gets called when the service starts. A View is 'inflated' for the user interface
     @Override
     public View onCreateInputView() {
@@ -44,7 +45,7 @@ public class QuadrantIME extends InputMethodService
         detector = new GestureDetector(this, new GestureListener());
 
         quadView = getLayoutInflater().inflate(R.layout.activity_quadrants, null);
-        //quadView.setBackgroundColor(0xCCb1e0f9);
+        quadView.setBackgroundColor(0xCCb1e0f9);
         adjustView();
         Button myButton = (Button)quadView.findViewById(R.id.shift);
         myButton.setAlpha(.3f);
@@ -58,15 +59,11 @@ public class QuadrantIME extends InputMethodService
                 return true;
             }
         });
+
         //updatePreview();
         return quadView;
     }
 
-    /*@Override
-    *//*public void onStartInputView(EditorInfo attribute, boolean restarting) {
-        super.onStartInputView(attribute, restarting);
-        updatePreview();
-    }*/
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
@@ -225,9 +222,9 @@ public class QuadrantIME extends InputMethodService
 
     public void onEnterClick(View view) {
         InputConnection ic = getCurrentInputConnection();
-        /*KeyEvent myKey = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER);
-        ic.sendKeyEvent(myKey);*/
         ic.performEditorAction(EditorInfo.IME_ACTION_DONE);
+        ic.performEditorAction(EditorInfo.IME_ACTION_SEND);
+
         buzzMe();
     }
 
@@ -271,7 +268,9 @@ public class QuadrantIME extends InputMethodService
         ExtractedTextRequest myReq = new ExtractedTextRequest();
         TextView outputText = (TextView) quadView.findViewById(R.id.outputText);
         outputText.setText(ic.getExtractedText(myReq, 0).text);
+        //Log.d(TAG, "Extracted text is: " + ic.getExtractedText(myReq, 0).text.toString());
     }
+
 
     public void adjustView()
     {
@@ -327,7 +326,7 @@ public class QuadrantIME extends InputMethodService
         TextView newView = (TextView) quadView.findViewById(R.id.topLeft);
         if(caps){
             newView.setText(s.toUpperCase());
-            //Log.d(TAG, "Redrawing top left corner");
+
         }
         else{
             newView.setText(s);

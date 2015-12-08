@@ -10,14 +10,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/editText"
         android:background="@drawable/text_back"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:hint="Try me!"
+        android:gravity="center"
+        android:layout_gravity="center"
         android:layout_weight="0.25" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Welcome to Acuity Keyboard. Don&apos;t forget to change your keyboard settings to use our service. Test it out in other applications as well. Enjoy!"
+        android:text="Welcome to Acuity Keyboard! \n\nDon&apos;t forget to change your keyboard settings to use our service. Test it out in other applications as well. Enjoy!"
         android:id="@+id/textView"
+        android:paddingLeft="16dp"
+        android:paddingRight="8dp"
         android:layout_weight=".65" />
 
     <TextView
@@ -25,6 +31,8 @@
         android:layout_height="wrap_content"
         android:text="Program made by Rohan Dawson, Justin Hockenberry, and Zeke Moreland for CSCI 3320 under Dr. Robert Senser. 2015"
         android:id="@+id/textView2"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:layout_weight="0.10" />
 
 </LinearLayout>
